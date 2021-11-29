@@ -27,10 +27,15 @@
 ## Links to Agile Iterative Process (AIP) Products
 
 To Project Backlog (Product Backlog, Iteration Backlogs, and Work Log):
-**TODO**
+
+[https://docs.google.com/spreadsheets/d/1DmnGjTfYCdlwXq4yxJ25zSwCLq8LcW4DftqtF5_p5Tk/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1DmnGjTfYCdlwXq4yxJ25zSwCLq8LcW4DftqtF5_p5Tk/edit?usp=sharing)
 
 To Sprint Planning Notes/Review:
-**TODO**
+
+[https://docs.google.com/document/d/1JHqd9Alk2kZUKKPmb6cLGOPEvR-gZKouV5svNGUF8SE/edit?usp=sharing](https://docs.google.com/document/d/1JHqd9Alk2kZUKKPmb6cLGOPEvR-gZKouV5svNGUF8SE/edit?usp=sharing)
+
+Furthermore, see the "UML" directory of this package for UML files, and Proposal
+deliverables of the initial proposal in the "Proposal" directory.
 
 ## Known Issues/Bugs
 
