@@ -1,6 +1,7 @@
 # enpm808x_final_inspection_robot
 
-**TODO**: Travis and Coveralls badges
+[![Build Status](https://app.travis-ci.com/rnvandemark/enpm808x_final_inspection_robot.svg?branch=master)](https://app.travis-ci.com/rnvandemark/enpm808x_final_inspection_robot)
+[![Coverage Status](https://coveralls.io/repos/github/rnvandemark/enpm808x_final_inspection_robot/badge.svg?branch=master)](https://coveralls.io/github/rnvandemark/enpm808x_final_inspection_robot?branch=master)
 
 ## Project Overview/Description
 
