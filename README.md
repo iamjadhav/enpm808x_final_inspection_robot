@@ -34,6 +34,9 @@ To Sprint Planning Notes/Review:
 
 [https://docs.google.com/document/d/1JHqd9Alk2kZUKKPmb6cLGOPEvR-gZKouV5svNGUF8SE/edit?usp=sharing](https://docs.google.com/document/d/1JHqd9Alk2kZUKKPmb6cLGOPEvR-gZKouV5svNGUF8SE/edit?usp=sharing)
 
+Furthermore, see the "UML" directory of this package for UML files, and Proposal
+deliverables of the initial proposal in the "Proposal" directory.
+
 ## Known Issues/Bugs
 
 **TODO**
