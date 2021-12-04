@@ -123,7 +123,8 @@ script:
   - catkin_make run_tests && catkin_test_results
 
 after_success:
-  - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
+  - cd $CI_SOURCE_PATH
+  - coveralls --root . -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
 
 notifications:
   email: false
