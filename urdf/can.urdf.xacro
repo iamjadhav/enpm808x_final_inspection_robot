@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:arg name="nominal" default="1" /> <!-- boolean (0 or 1) -->
+    <xacro:property name="mass" value="1.0" /> <!-- kg -->
+    <xacro:property name="radius" value="0.05" /> <!-- meters -->
+    <xacro:property name="length" value="0.20" /> <!-- meters -->
+    <xacro:property name="color" value="${'Green' if $(arg nominal) else 'Red'}" />
+    <link name="simple_can_link">
+        <inertial>
+            <origin xyz="0 0 0" />
+            <mass value="1.0" />
+            <inertia ixx="${(mass/12)*((3*radius*radius)+(length*length))}"
+                     ixy="0.0"
+                     ixz="0.0"
+                     iyy="${(mass/12)*((3*radius*radius)+(length*length))}"
+                     iyz="0.0"
+                     izz="${(mass/2)*radius*radius}"
+            />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <cylinder radius="${radius}" length="${length}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <cylinder radius="${radius}" length="${length}" />
+            </geometry>
+        </collision>
+    </link>
+    <gazebo reference="simple_can_link">
+        <material>Gazebo/${color}</material>
+    </gazebo>
+</robot>
