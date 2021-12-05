@@ -1,0 +1,27 @@
+<launch>
+    <!-- unique identier of the Gazebo model -->
+    <arg name="id" />
+    <!-- is the can nominal (1/'true') or defective (0/'false')? -->
+    <arg name="nominal" />
+    <!-- x-position of the Gazebo model -->
+    <arg name="x" />
+    <!-- y-position of the Gazebo model -->
+    <arg name="y" />
+    <!-- z-position of the Gazebo model -->
+    <arg name="z" />
+
+    <arg name="desc" value="$(eval 'can_' + ('nominal' if arg('nominal') else 'defective') + '_description')" />
+
+    <!-- send the URDF to the parameter server -->
+    <param name="$(arg desc)"
+           command="$(find xacro)/xacro $(find enpm808x_final_inspection_robot)/urdf/can.urdf.xacro nominal:=$(arg nominal)"
+    />
+
+    <!-- push the description to the factory and spawn the can in Gazebo -->
+    <node name="$(anon spawn_can)"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-urdf -param $(arg desc) -x $(arg x) -y $(arg y) -z $(arg z) -model can_model_$(arg id)"
+          respawn="false"
+    />
+</launch>
