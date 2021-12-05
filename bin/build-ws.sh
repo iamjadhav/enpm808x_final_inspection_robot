@@ -16,10 +16,13 @@ if [[ 1 -le $# && "-l" == $1 ]]; then
 					     --cmake-args "-DCATKIN_ENABLE_TESTING=0"
 fi
 
-# Build all packages except 'enpm808x_final_inspection_robot' and do NOT build their tests
-catkin_make_isolated --install \
-                     --ignore-pkg enpm808x_final_inspection_robot \
-					 --cmake-args "-DCATKIN_ENABLE_TESTING=0"
+# Pass the -o option to only build this package
+if [[ ! ( 1 -le $# && "-o" == $1 ) ]]; then
+    # Build all packages except 'enpm808x_final_inspection_robot' and do NOT build their tests
+    catkin_make_isolated --install \
+                         --ignore-pkg enpm808x_final_inspection_robot \
+                         --cmake-args "-DCATKIN_ENABLE_TESTING=0"
+fi
 
 # Build only the 'enpm808x_final_inspection_robot' package and build its tests
 catkin_make_isolated --install \

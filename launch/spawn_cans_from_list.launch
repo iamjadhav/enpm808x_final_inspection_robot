@@ -1,0 +1,48 @@
+<launch>
+    <!-- argument(s) for recursion:
+         - can_list: a string of colon-separated arguments
+         - next_id: the unique ID for this can
+    -->
+    <arg name="can_args_list" />
+    <arg name="next_id" default="0" />
+
+    <!-- the index of the next delimeter (either a non-negative int if there is
+         another to process after this one, or -1 if there is not another)
+    -->
+    <arg name="i" value="$(eval arg('can_args_list').find(':'))" />
+    <!-- the arguments for a single can to be spawned -->
+    <arg name="can_args" value="$(eval (arg('can_args_list') if i == -1 else arg('can_args_list')[:i]).strip())" />
+    <!-- true if the can arguments are not an empty string, false otherwise -->
+    <arg name="valid" value="$(eval 0 != len(arg('can_args').strip()))" />
+
+    <!-- collect the can's arguments if valid -->
+    <arg name="can_nominal" value="$(eval arg('can_args').split(',')[0].strip())" if="$(arg valid)" />
+    <arg name="can_x" value="$(eval arg('can_args').split(',')[1].strip())" if="$(arg valid)" />
+    <arg name="can_y" value="$(eval arg('can_args').split(',')[2].strip())" if="$(arg valid)" />
+    <arg name="can_z" value="$(eval arg('can_args').split(',')[3].strip())" if="$(arg valid)" />
+    <!-- spawn this can if valid -->
+    <include file="$(find enpm808x_final_inspection_robot)/launch/spawn_can.launch"
+             if="$(arg valid)">
+        <arg name="id" value="$(arg next_id)" />
+        <arg name="nominal" value="$(arg can_nominal)" />
+        <arg name="x" value="$(arg can_x)" />
+        <arg name="y" value="$(arg can_y)" />
+        <arg name="z" value="$(arg can_z)" />
+    </include>
+
+    <!-- the remaining arguments to recursively issue -->
+    <arg name="remaining_args_list" value="$(eval '' if i == -1 else arg('can_args_list')[int(arg('i'))+1:])" />
+    <!-- true if the remaining arguments are not an empty string, false otherwise -->
+    <arg name="remaining_valid" value="$(eval 0 != len(arg('remaining_args_list').strip()))" />
+    <!-- recursively call this launch file if valid -->
+    <include file="$(find enpm808x_final_inspection_robot)/launch/spawn_cans_from_list.launch"
+             if="$(arg remaining_valid)">
+        <arg name="can_args_list" value="$(arg remaining_args_list)" />
+        <arg name="next_id" value="$(eval int(arg('next_id'))+1)" />
+    </include>
+
+    <!-- if this is the top-level call, add this string to the parameter server -->
+    <rosparam subst_value="True" if="$(eval 0 == arg('next_id'))">
+        /enpm808x/can_args_list: "$(arg can_args_list)"
+    </rosparam>
+</launch>
