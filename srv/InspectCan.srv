@@ -1,0 +1,21 @@
+# Given an RGB image, return the characteristics of a detected can
+
+# The RGB image to find the can in
+sensor_msgs/Image rgb_image
+
+---
+
+# Whether or not the operation was successful
+bool success
+
+# If the can was successfully found, this is whether or not it is nominal
+# (true) or defective (false)
+bool nominal
+
+# If the can was successfully found, this is the x coordinate in pixel-space of
+# the center of the can
+int64 centroid_x
+
+# If the can was successfully found, this is the y coordinate in pixel-space of
+# the center of the can
+int64 centroid_y
