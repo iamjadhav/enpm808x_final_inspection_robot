@@ -1,0 +1,21 @@
+# Given a position in pixel-space and a depth cloud, get the transformation
+# between the camera frame and the can
+
+# A depth cloud associated with the RGB image used to find the values of
+# centroid_x and centroid_y below
+sensor_msgs/PointCloud2 point_cloud
+
+# The x coordinate in pixel-space of the center of the can
+int64 centroid_x
+
+# The y coordinate in pixel-space of the center of the can
+int64 centroid_y
+
+---
+
+# Whether or not the operation was successful
+bool success
+
+# The transform from the camera frame (the source of the data in point_cloud
+# above) C to this defective can's frame Di
+geometry_msgs/Transform transform_CDi

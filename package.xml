@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>enpm808x_final_inspection_robot</name>
+    <version>0.0.0</version>
+    <description>The implementation for the ENPM808X final, an inspection robot.</description>
+    <maintainer email="rnvandemark@gmail.com">R. Nick Vandemark</maintainer>
+    <license>Apache 2.0</license>
+    <author>R. Nick Vandemark</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <depend>roscpp</depend>
+    <depend>message_generation</depend>
+    <depend>geometry_msgs</depend>
+    <depend>sensor_msgs</depend>
+    <depend>actionlib</depend>
+    <depend>control_msgs</depend>
+    <depend>move_base_msgs</depend>
+    <depend>tf</depend>
+
+    <doc_depend>doxygen</doc_depend>
+</package>
