@@ -26,8 +26,6 @@
 #include <sensor_msgs/Image.h>
 #include <vector>
 #include "ros/ros.h"
-#include <opencv2/opencv.hpp>
-#include "cv_bridge/cv_bridge.h"
 #include "enpm808x_final_inspection_robot/InspectCan.h"
 #include "enpm808x_final_inspection_robot/LocalizeCan.h"
 
@@ -42,22 +40,6 @@ class CanCharacterizer {
   ros::ServiceServer inspect_can_srv;
   // The Server for the LocalizeCan Service
   ros::ServiceServer localize_can_srv;
-  // Shape of the OpenCV Frame having Width and Height
-  cv::Size frameShape;
-  // Maksed Frame which has the masked output of RED HSV values
-  cv::Mat maskedFrame;
-  // OpenCV HSV frame converted from the RGB frame
-  cv::Mat hsvFrame;
-  // Raw ROS frame from the RGBD sensor onboard the TIAGo
-  cv::Mat rosRawFrame;
-  // Storing Contours obtained by OpenCV
-  std::vector<std::vector<cv::Point>> contours;
-  // HSV Lower Limit
-  const cv::Scalar hsvLower = {160, 50, 50};
-  // HSV Higher Limit
-  const cv::Scalar hsvHigher = {180, 255, 255};
-  // Final boolean indication of the success of inspection and localization
-  bool detect;
 
  public:
 /**
@@ -68,8 +50,6 @@ class CanCharacterizer {
 * @brief Destructor
 */
   ~CanCharacterizer();
-  // OpenCV Image converted from the raw ROS image
-  cv::Mat ros_to_cv_image;
 /**
 * @brief Method which handles the Inspection of the Can using InspectCan
 * @param req The rgb_image obtained from sensor_msgs topic
