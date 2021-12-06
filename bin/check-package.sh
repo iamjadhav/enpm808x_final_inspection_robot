@@ -16,7 +16,7 @@ echo "********************"
 echo "******CPPCHECK******"
 echo "********************"
 echo
-cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem src/*.cpp include/enpm808x_final_inspection_robot/*.hpp
+cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem src/*.cpp include/enpm808x_final_inspection_robot/*.hpp test/*.cpp
 
 # Perform cpplint on all C++ source and header files
 echo
@@ -24,4 +24,4 @@ echo "********************"
 echo "*******CPPLINT******"
 echo "********************"
 echo
-cpplint src/*.cpp include/enpm808x_final_inspection_robot/*.hpp
+cpplint src/*.cpp include/enpm808x_final_inspection_robot/*.hpp test/*.cpp
