@@ -7,6 +7,8 @@
 
 **TODO**
 
+See the license for this project [here](LICENSE.txt).
+
 ## Personnel
 
 ### Aditya Jadhav

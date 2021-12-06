@@ -4,7 +4,7 @@
     <version>0.0.0</version>
     <description>The implementation for the ENPM808X final, an inspection robot.</description>
     <maintainer email="rnvandemark@gmail.com">R. Nick Vandemark</maintainer>
-    <license>TODO</license>
+    <license>Apache 2.0</license>
     <author>R. Nick Vandemark</author>
 
     <buildtool_depend>catkin</buildtool_depend>
