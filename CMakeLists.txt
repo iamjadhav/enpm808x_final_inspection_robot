@@ -31,12 +31,15 @@ include_directories(
 add_executable(inspection_controller src/InspectionControllerNode.cpp src/InspectionController.cpp)
 target_link_libraries(inspection_controller ${catkin_LIBRARIES})
 
+add_executable(can_characterizer src/CanCharacterizer.cpp src/CanCharacterizerNode.cpp)
+target_link_libraries(can_characterizer ${catkin_LIBRARIES})
+
 install(
     DIRECTORY include
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 install(
-    TARGETS inspection_controller
+    TARGETS inspection_controller can_characterizer
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 install(
