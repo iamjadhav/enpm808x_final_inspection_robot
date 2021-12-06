@@ -21,7 +21,7 @@
  */
 
 #include "ros/ros.h"
-#include "../include/CanCharacterizer.hpp"
+#include "enpm808x_final_inspection_robot/CanCharacterizer.hpp"
 
 /**
  * @brief Inspector Node overseeing the Can Detection and Localization

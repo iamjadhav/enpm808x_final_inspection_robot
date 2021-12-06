@@ -21,7 +21,7 @@
  * limitations under the License.
  */
 
-#include "../include/CanCharacterizer.hpp"
+#include "enpm808x_final_inspection_robot/CanCharacterizer.hpp"
 
 CanCharacterizer::CanCharacterizer() {
     // Initializing...
@@ -33,14 +33,14 @@ CanCharacterizer::~CanCharacterizer() {
     ROS_INFO_STREAM("All done, Moving On...");
 }
 
-bool CanCharacterizer::handleInspectCanRequest(enpm808x_final_inspection_robot::InspectCan::
-    InspectCanRequest &req, enpm808x_final_inspection_robot::InspectCan::
-        InspectCanResponse &res) {
+bool CanCharacterizer::handleInspectCanRequest(
+    enpm808x_final_inspection_robot::InspectCan::InspectCan::Request &req,
+    enpm808x_final_inspection_robot::InspectCan::InspectCan::Response &res) {
 return true;
 }
 
-bool CanCharacterizer::handleLocalizeCanRequest(enpm808x_final_inspection_robot::LocalizeCan::
-    LocalizeCanRequest &req, enpm808x_final_inspection_robot::LocalizeCan::
-        LocalizeCanResponse &res) {
+bool CanCharacterizer::handleLocalizeCanRequest(
+    enpm808x_final_inspection_robot::LocalizeCan::LocalizeCan::Request &req,
+    enpm808x_final_inspection_robot::LocalizeCan::LocalizeCan::Response &res) {
 return true;
 }

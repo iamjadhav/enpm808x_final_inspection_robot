@@ -62,8 +62,6 @@ class CanCharacterizer {
  public:
 /**
 * @brief  Constructor for Can Characterizer class
-* @param  none
-* @return none
 */
   CanCharacterizer();
 /**
@@ -74,21 +72,21 @@ class CanCharacterizer {
   cv::Mat ros_to_cv_image;
 /**
 * @brief Method which handles the Inspection of the Can using InspectCan
-* @param inspectReq The rgb_image obtained from sensor_msgs topic
-* @param inspectRes Booleans success, nominal and the can's centroid coordinates
-* @return none
+* @param req The rgb_image obtained from sensor_msgs topic
+* @param res Booleans success, nominal and the can's centroid coordinates
+* @return Whether or not the request was successfully serviced.
 */
-  bool handleInspectCanRequest(enpm808x_final_inspection_robot::InspectCan::
-      InspectCanRequest &req, enpm808x_final_inspection_robot::InspectCan::
-          InspectCanResponse &res);
+  bool handleInspectCanRequest(
+    enpm808x_final_inspection_robot::InspectCan::InspectCan::Request &req,
+    enpm808x_final_inspection_robot::InspectCan::InspectCan::Response &res);
 /**
 * @brief Method which handles the Localization of the Can using LocalizeCan
 * service request and response.
-* @param localizeReq Point cloud data and can's centroid coordinates
-* @param localizeRes Boolean success and the Can's transform wrt world frame
-* @return none
+* @param req Point cloud data and can's centroid coordinates
+* @param res Boolean success and the Can's transform wrt world frame
+* @return Whether or not the request was successfully serviced.
 */
-  bool handleLocalizeCanRequest(enpm808x_final_inspection_robot::LocalizeCan::
-      LocalizeCanRequest &req, enpm808x_final_inspection_robot::LocalizeCan::
-          LocalizeCanResponse &res);
+  bool handleLocalizeCanRequest(
+    enpm808x_final_inspection_robot::LocalizeCan::LocalizeCan::Request &req,
+    enpm808x_final_inspection_robot::LocalizeCan::LocalizeCan::Response &res);
 };
