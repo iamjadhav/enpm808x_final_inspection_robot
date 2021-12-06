@@ -1,0 +1,6 @@
+<launch>
+    <!-- spawn cans at specific locations for testing -->
+    <include file="$(find enpm808x_final_inspection_robot)/launch/spawn_cans_from_list.launch">
+        <arg name="can_args_list" value="1,-0.5,-7.0,1.0 : 1,-1.0,-7.0,1.0 : 0,-1.5,-7.0,1.0 : 1,-0.5,-9.0,1.0 : 1,-1.0,-9.0,1.0 : 1,-1.5,-9.0,1.0 : 0,-0.5,-11.0,1.0 : 1,-1.0,-11.0,1.0 : 1,-1.5,-11.0,1.0" />
+    </include>
+</launch>
