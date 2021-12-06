@@ -51,3 +51,26 @@ install(
     DIRECTORY launch
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
+
+if(CATKIN_ENABLE_TESTING)
+    find_package(rostest REQUIRED)
+
+    add_rostest_gtest(
+        test_main
+        test/launch/test_main.launch
+        test/TestMain.cpp
+    )
+    target_link_libraries(
+        test_main
+        ${catkin_LIBRARIES}
+    )
+#    add_dependencies(
+#        test_main
+#        inspection_controller
+#        can_characterizer
+#    )
+    install(
+        DIRECTORY test
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    )
+endif(CATKIN_ENABLE_TESTING)
