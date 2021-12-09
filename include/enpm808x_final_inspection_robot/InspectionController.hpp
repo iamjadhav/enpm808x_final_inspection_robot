@@ -107,6 +107,16 @@ class InspectionController {
     std::vector<tf::Vector3> expected_can_positions;
 
     /**
+     * The last heard RGB image, used when requesting can inspection.
+     */
+    sensor_msgs::Image last_rgb_image;
+
+    /**
+     * The last heard point cloud, used when requesting can localization.
+     */
+    sensor_msgs::PointCloud2 last_point_cloud;
+
+    /**
      * Whether or not the TIAGo has finished tucking its arm in.
      */
     bool arm_tucked;
