@@ -70,11 +70,7 @@ if(CATKIN_ENABLE_TESTING)
         test_main
         ${catkin_LIBRARIES}
     )
-#    add_dependencies(
-#        test_main
-#        inspection_controller
-#        can_characterizer
-#    )
+
     install(
         DIRECTORY test
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
