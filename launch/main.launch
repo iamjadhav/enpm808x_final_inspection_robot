@@ -44,6 +44,15 @@
           if="$(arg view_image)"
     />
 
+    <!-- Start our custom nodes -->
+    <node name="inspection_controller"
+          pkg="enpm808x_final_inspection_robot"
+          type="inspection_controller"
+          output="screen"
+          respawn="false"
+          required="true"
+    />
+
     <rosparam subst_value="True">
         /enpm808x/home_position: $(arg tiago_start_pose)
         /enpm808x/detection_pose_offset: $(arg detection_pose_offset)
