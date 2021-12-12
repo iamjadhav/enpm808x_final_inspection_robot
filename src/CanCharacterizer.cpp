@@ -36,6 +36,7 @@ CanCharacterizer::~CanCharacterizer() {
 bool CanCharacterizer::handleInspectCanRequest(
     enpm808x_final_inspection_robot::InspectCan::InspectCan::Request &req,
     enpm808x_final_inspection_robot::InspectCan::InspectCan::Response &res) {
+      
 return true;
 }
 

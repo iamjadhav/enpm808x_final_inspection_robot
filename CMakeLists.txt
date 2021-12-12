@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
     control_msgs
     move_base_msgs
     tf
+    std_msgs
 )
 
 add_service_files(
@@ -20,7 +21,7 @@ generate_messages(DEPENDENCIES geometry_msgs sensor_msgs)
 
 catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS roscpp geometry_msgs sensor_msgs actionlib control_msgs move_base_msgs tf
+    CATKIN_DEPENDS roscpp geometry_msgs sensor_msgs actionlib control_msgs move_base_msgs tf std_msgs
 )
 
 include_directories(

@@ -37,7 +37,7 @@
 class CanCharacterizer {
  private:
   // The Server for the InspectCan Service
-  ros::ServiceServer inspect_can_srv;
+  // ros::ServiceServer inspect_can_srv;
   // The Server for the LocalizeCan Service
   ros::ServiceServer localize_can_srv;
 

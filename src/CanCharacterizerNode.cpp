@@ -22,12 +22,19 @@
 
 #include "ros/ros.h"
 #include "enpm808x_final_inspection_robot/CanCharacterizer.hpp"
+#include <iostream>
 
 /**
  * @brief Inspector Node overseeing the Can Detection and Localization
  */
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "detector");
+  ros::init(argc, argv, "can_characterizer");
   ros::NodeHandle nh;
+  ros::ServiceServer inspect_can_srv;
+  CanCharacterizer inspect;
+  inspect_can_srv = nh.advertiseService("inspect_can",
+                          &CanCharacterizer::handleInspectCanRequest, &inspect);
+  ROS_INFO("Inspect can Service Initialized ");
+  ros::spin();
   return 0;
 }
