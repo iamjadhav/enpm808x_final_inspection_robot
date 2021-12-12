@@ -26,7 +26,19 @@
 #include "enpm808x_final_inspection_robot/LocalizeCan.h"
 
 
+#include"enpm808x_final_inspection_robot/InspectCan.h"
+
 std::unique_ptr<ros::NodeHandle> nh;
+
+TEST(ServiceTest, ServiceExistence) {
+  //ros::NodeHandle n;
+  auto client = nh->serviceClient<enpm808x_final_inspection_robot::InspectCan>
+  ("inspectcan");
+  bool exists(client.waitForExistence(ros::Duration(5)));
+  EXPECT_FALSE(exists);
+  enpm808x_final_inspection_robot::InspectCan srv;
+}
+
 
 TEST(TESTSuite, testMain) {
     const bool dummy = true;
