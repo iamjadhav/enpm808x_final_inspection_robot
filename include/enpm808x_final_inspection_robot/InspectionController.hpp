@@ -232,7 +232,6 @@ class InspectionController {
      * the first value in the last.
      * @param new_expected_can_positions The ordered list of expected,
      * approximate can positions.
-     * @return Whether the provided list is valid and the pipeline has begun.
      */
     void inspect(const std::vector<tf::Vector3>& new_expected_can_positions);
 
