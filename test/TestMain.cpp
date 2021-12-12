@@ -24,6 +24,7 @@
 #include <gtest/gtest.h>
 #include<ros/service_client.h>
 #include <memory>
+
 #include"enpm808x_final_inspection_robot/InspectCan.h"
 
 std::unique_ptr<ros::NodeHandle> nh;
