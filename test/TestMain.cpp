@@ -22,14 +22,28 @@
 
 #include <ros/ros.h>
 #include <gtest/gtest.h>
-
 #include <memory>
+#include "enpm808x_final_inspection_robot/LocalizeCan.h"
+
 
 std::unique_ptr<ros::NodeHandle> nh;
 
 TEST(TESTSuite, testMain) {
     const bool dummy = true;
     EXPECT_TRUE(dummy);
+}
+
+/**
+*  Simple Existence Test for the LocalizeCan Service.
+*/
+TEST(LocalizeCanTest, Test_LocalizeCan_Existence) {
+    // client for the LocalizeCan Service
+    auto client = nh->serviceClient<enpm808x_final_inspection_robot::
+                                LocalizeCan>("LocalizeCanExistence");
+
+    // Test to validate service existence
+    bool exists(client.waitForExistence(ros::Duration(2)));
+    EXPECT_FALSE(exists);
 }
 
 int main(int argc, char** argv) {
