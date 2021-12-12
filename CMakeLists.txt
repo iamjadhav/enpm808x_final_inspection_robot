@@ -59,7 +59,6 @@ if(CATKIN_ENABLE_TESTING)
         test_main
         test/launch/test_main.launch
         test/TestMain.cpp
-	test/CanCharacterizerTest.cpp
     )
     target_link_libraries(
         test_main
