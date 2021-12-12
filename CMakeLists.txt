@@ -16,6 +16,10 @@ add_service_files(
     DIRECTORY srv
     FILES InspectCan.srv LocalizeCan.srv
 )
+add_message_files(
+    DIRECTORY msg
+    FILES InspectionMetrics.msg
+)
 generate_messages(DEPENDENCIES geometry_msgs sensor_msgs)
 
 catkin_package(
