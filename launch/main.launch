@@ -10,7 +10,7 @@
     <arg name="robot" default="titanium" />
     <arg name="tiago_start_pose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0" />
     <arg name="extra_gazebo_args" default="" />
-    <arg name="detection_pose_offset" default="-x 0.0 -y 0.0 -z -0.5 -R 0.0 -P 0.0 -Y 0.0" />
+    <arg name="detection_pose_offset" default="-x 0.0 -y 0.0 -z -0.6 -R 0.0 -P 0.0 -Y -1.57079632" />
 
     <!-- launch TIAGo navigation using our arguments, which:
          - Runs the public simulation version (allows for multiple robot types
