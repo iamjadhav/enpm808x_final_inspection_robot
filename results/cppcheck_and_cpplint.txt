@@ -1,0 +1,46 @@
+./src/enpm808x_final_inspection_robot/bin/check-package.sh
+********************
+******CPPCHECK******
+********************
+
+Checking include/enpm808x_final_inspection_robot/CanCharacterizer.hpp ...
+1/8 files checked 4% done
+Checking include/enpm808x_final_inspection_robot/InspectionController.hpp ...
+2/8 files checked 18% done
+Checking src/CanCharacterizer.cpp ...
+3/8 files checked 21% done
+Checking src/CanCharacterizerNode.cpp ...
+4/8 files checked 23% done
+Checking src/InspectionController.cpp ...
+[src/InspectionController.cpp:248]: (style) Variable 'continue_inspection' is assigned a value that is never used.
+5/8 files checked 48% done
+Checking src/InspectionControllerNode.cpp ...
+6/8 files checked 70% done
+Checking test/TestInspectionController.cpp ...
+[test/TestInspectionController.cpp:165]: (error) Invalid number of character '{' when no macros are defined.
+7/8 files checked 82% done
+Checking test/TestMain.cpp ...
+8/8 files checked 100% done
+[src/CanCharacterizer.cpp:36]: (style) The function 'handleInspectCanRequest' is never used.
+[src/CanCharacterizer.cpp:42]: (style) The function 'handleLocalizeCanRequest' is never used.
+(information) Cppcheck cannot find all the include files (use --check-config for details)
+
+********************
+*******CPPLINT******
+********************
+
+include/enpm808x_final_inspection_robot/CanCharacterizer.hpp:60:  Is this a non-const reference? If so, make const or use a pointer: enpm808x_final_inspection_robot::InspectCan::InspectCan::Request &req  [runtime/references] [2]
+include/enpm808x_final_inspection_robot/CanCharacterizer.hpp:61:  Is this a non-const reference? If so, make const or use a pointer: enpm808x_final_inspection_robot::InspectCan::InspectCan::Response &res  [runtime/references] [2]
+include/enpm808x_final_inspection_robot/CanCharacterizer.hpp:70:  Is this a non-const reference? If so, make const or use a pointer: enpm808x_final_inspection_robot::LocalizeCan::LocalizeCan::Request &req  [runtime/references] [2]
+include/enpm808x_final_inspection_robot/CanCharacterizer.hpp:71:  Is this a non-const reference? If so, make const or use a pointer: enpm808x_final_inspection_robot::LocalizeCan::LocalizeCan::Response &res  [runtime/references] [2]
+Done processing include/enpm808x_final_inspection_robot/CanCharacterizer.hpp
+include/enpm808x_final_inspection_robot/InspectionController.hpp:194:  Is this a non-const reference? If so, make const or use a pointer: ros::NodeHandle& nh  [runtime/references] [2]
+Done processing include/enpm808x_final_inspection_robot/InspectionController.hpp
+Done processing src/CanCharacterizer.cpp
+Done processing src/CanCharacterizerNode.cpp
+Done processing src/InspectionController.cpp
+src/InspectionControllerNode.cpp:24:  <regex> is an unapproved C++11 header.  [build/c++11] [5]
+Done processing src/InspectionControllerNode.cpp
+Done processing test/TestInspectionController.cpp
+Done processing test/TestMain.cpp
+Total errors found: 6

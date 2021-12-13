@@ -1,0 +1,76 @@
+\hypertarget{classCanCharacterizer}{}\section{Can\+Characterizer Class Reference}
+\label{classCanCharacterizer}\index{Can\+Characterizer@{Can\+Characterizer}}
+
+
+The class concerned with the Detection and Localization of the can in front of the T\+I\+A\+Go using two services.  
+
+
+
+
+{\ttfamily \#include $<$Can\+Characterizer.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCanCharacterizer_a17d1e06b2b693e6c0f42759928122e20}\label{classCanCharacterizer_a17d1e06b2b693e6c0f42759928122e20}} 
+\hyperlink{classCanCharacterizer_a17d1e06b2b693e6c0f42759928122e20}{Can\+Characterizer} ()
+\begin{DoxyCompactList}\small\item\em Constructor for Can Characterizer class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCanCharacterizer_afb1554dca01b7c19cee2523313dec47f}\label{classCanCharacterizer_afb1554dca01b7c19cee2523313dec47f}} 
+\hyperlink{classCanCharacterizer_afb1554dca01b7c19cee2523313dec47f}{$\sim$\+Can\+Characterizer} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \hyperlink{classCanCharacterizer_a1c4af17fc5c15849ae895c115f2971f4}{handle\+Inspect\+Can\+Request} (enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Inspect\+Can\+::\+Inspect\+Can\+::\+Request \&req, enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Inspect\+Can\+::\+Inspect\+Can\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Method which handles the Inspection of the Can using Inspect\+Can. \end{DoxyCompactList}\item 
+bool \hyperlink{classCanCharacterizer_a7a0e5c8217a130f3952a476e5cd59bff}{handle\+Localize\+Can\+Request} (enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Localize\+Can\+::\+Localize\+Can\+::\+Request \&req, enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Localize\+Can\+::\+Localize\+Can\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Method which handles the Localization of the Can using Localize\+Can service request and response. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The class concerned with the Detection and Localization of the can in front of the T\+I\+A\+Go using two services. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCanCharacterizer_a1c4af17fc5c15849ae895c115f2971f4}\label{classCanCharacterizer_a1c4af17fc5c15849ae895c115f2971f4}} 
+\index{Can\+Characterizer@{Can\+Characterizer}!handle\+Inspect\+Can\+Request@{handle\+Inspect\+Can\+Request}}
+\index{handle\+Inspect\+Can\+Request@{handle\+Inspect\+Can\+Request}!Can\+Characterizer@{Can\+Characterizer}}
+\subsubsection{\texorpdfstring{handle\+Inspect\+Can\+Request()}{handleInspectCanRequest()}}
+{\footnotesize\ttfamily bool Can\+Characterizer\+::handle\+Inspect\+Can\+Request (\begin{DoxyParamCaption}\item[{enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Inspect\+Can\+::\+Inspect\+Can\+::\+Request \&}]{req,  }\item[{enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Inspect\+Can\+::\+Inspect\+Can\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Method which handles the Inspection of the Can using Inspect\+Can. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & The rgb\+\_\+image obtained from sensor\+\_\+msgs topic \\
+\hline
+{\em res} & Booleans success, nominal and the can\textquotesingle{}s centroid coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not the request was successfully serviced. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCanCharacterizer_a7a0e5c8217a130f3952a476e5cd59bff}\label{classCanCharacterizer_a7a0e5c8217a130f3952a476e5cd59bff}} 
+\index{Can\+Characterizer@{Can\+Characterizer}!handle\+Localize\+Can\+Request@{handle\+Localize\+Can\+Request}}
+\index{handle\+Localize\+Can\+Request@{handle\+Localize\+Can\+Request}!Can\+Characterizer@{Can\+Characterizer}}
+\subsubsection{\texorpdfstring{handle\+Localize\+Can\+Request()}{handleLocalizeCanRequest()}}
+{\footnotesize\ttfamily bool Can\+Characterizer\+::handle\+Localize\+Can\+Request (\begin{DoxyParamCaption}\item[{enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Localize\+Can\+::\+Localize\+Can\+::\+Request \&}]{req,  }\item[{enpm808x\+\_\+final\+\_\+inspection\+\_\+robot\+::\+Localize\+Can\+::\+Localize\+Can\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Method which handles the Localization of the Can using Localize\+Can service request and response. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & Point cloud data and can\textquotesingle{}s centroid coordinates \\
+\hline
+{\em res} & Boolean success and the Can\textquotesingle{}s transform wrt world frame \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not the request was successfully serviced. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\hyperlink{CanCharacterizer_8hpp}{Can\+Characterizer.\+hpp}\item 
+src/\hyperlink{CanCharacterizer_8cpp}{Can\+Characterizer.\+cpp}\end{DoxyCompactItemize}

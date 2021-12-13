@@ -3,16 +3,21 @@
          launch and for all of its connections to be made -->
     <arg name="test_sleep" default="25.0" />
     <include file="$(find enpm808x_final_inspection_robot)/launch/main.launch">
-        <arg name="rviz" value="false" />
         <arg name="view_image" value="false" />
         <arg name="robot" value="titanium" />
         <arg name="tiago_start_pose" value="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0" />
         <arg name="extra_gazebo_args" value="" />
+        <!-- WARNING: name of deepest directory ('test_main_maps') cannot be
+             the same as the name of the test executable ('test_main')!!! -->
+        <arg name="map" value="$(find enpm808x_final_inspection_robot)/test/maps/test_main_maps" />
     </include>
     <include file="$(find enpm808x_final_inspection_robot)/test/launch/test_cans.launch" />
+    <!-- Give the test node a VERY long time before being considered a failure.
+         See test/TestMain.cpp -->
     <test test-name="my_test_main"
           pkg="enpm808x_final_inspection_robot"
           type="test_main"
+          time-limit="4000.0"
           launch-prefix="bash -c 'sleep $(arg test_sleep); $0 $@' "
     />
 </launch>

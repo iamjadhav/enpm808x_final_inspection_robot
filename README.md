@@ -5,9 +5,22 @@
 
 ## Project Overview/Description
 
-**TODO**
+This package intends to provide an implementation of an automated inspection
+robot, which can map its environment, plan paths, and dynamically update for
+obstacle avoidance. The inspection routine is a simple 'defective' check for
+color on 'cans' spawned at dynamically specified locations. Once specified,
+the robot will move to a pose slightly offset from the position to inspect the
+can using its built in sensors and cameras, repeat for each can, them go back
+to its home position.
 
-See the license for this project [here](LICENSE.txt).
+The robot used is the [TIAGo robot](https://pal-robotics.com/robots/tiago/),
+chosen because of its all-in-one solution for motion and sensing, as well as
+its massive support for open-sourced ROS/Gazebo/RViz solutions.
+
+This package builds on top of those utilities with its own custom controller to
+interface with the robot. Below describes the procedure to prepare the
+environment, run the main controller, and spawn a list of 'cans' for
+inspection.
 
 ## Personnel
 
@@ -21,11 +34,18 @@ See the license for this project [here](LICENSE.txt).
 
 #### R. Nick Vandemark
 
-**TODO**
+Nick graduated from his undergraduate program in the summer of 2019 with a
+skillset in computer engineering, software engineering, mathematics, and
+physics. He was a robotics engineer at a collaborative robotics startup for two
+years, and has been a contractor for NASA as a robotics software engineer for
+the last 1.5 years. Seeking a formal education in it, he is also about halfway
+through the robotics engineering program at UMD, in order to strengthen his
+otherwise self-taught background. His hobbies include creating software, rock
+climbing, snowboarding, bonfires, and, more recently, 3D modeling.
 
 ## License
 
-**TODO**
+See the license for this project [here](LICENSE.txt).
 
 ## Links to Agile Iterative Process (AIP) Products
 
@@ -42,7 +62,28 @@ deliverables of the initial proposal in the "Proposal" directory.
 
 ## Known Issues/Bugs
 
-**TODO**
+### System-Level Issues
+
+- [ ] The controller API provided here is tightly bound to ROS and Gazebo. This
+  may be acceptable considering the TIAGo utilities are as well, but there it'd
+  be beneficial to explore decoupling this controller from ROS utilities.
+- [ ] The CanCharacterizer class unfortunately remains unimplemented. The main
+      controller has stubbed out its interaction with this node for now and can
+      move as would be expected during the actual inspection routine, but no
+      inspection is performed at the moment.
+- [ ] The automated build jobs, including the tests, take a while to finish
+      because a lot of packages are built from source. Many of these are
+      possibly unnecessary for this package's intentions and could be removed
+      as dependencies. This was put off for the future in the interest of time.
+
+### Small Bugs / Issues to Note
+
+- [ ] The frames for the RGB camera and depth sensor are assumed to be the
+  same, but this is not true in reality. There is a very slight,
+  one-dimensional, translational offset that should really be accounted for.
+- [ ] There could be more intensive integration tests put in place, but were
+  put off as future work in the interest of time. Especially considering the
+  automated builds and tests already take a while.
 
 ## Dependencies
 
@@ -107,7 +148,101 @@ build script, build-ws.sh. See the 'Building the Package' section.
 
 ### Running a Sample of the Program
 
-**TODO**
+There are two steps to running the program. The first step, building a digital
+map of the environment, only has to be done once (but can be done multiple
+times). Then, every time the 'main' program is ran, it will use the saved map.
+There are launch files for each of these routines.
+
+- Prerequisites:
+  - You have set up your workspace as described in the 'Setting Up Your
+    Workspace' section, assuming the catkin workspace at e.g.
+    /path/to/tiago_ws/
+  - You have built the package as described in the 'Building the Package'
+    section
+- For each terminal opened, make sure your ROS installation and this workspace
+  are sourced, for example:
+```
+source /opt/ros/melodic/setup.bash
+source /path/to/tiago_ws/install_isolated/setup.bash
+```
+
+#### Creating a Map of the Environment
+
+First, launch the mapping configuration with the following command:
+```
+roslaunch enpm808x_final_inspection_robot create_map.launch
+```
+
+This will start Gazebo, RViz, and multiple TIAGo nodes/utilities. The map is
+initially empty, and we will have the TIAGo navigate around the environment to
+build it. To move the robot around, navigate to the RViz window and use the '2D
+Nav Goal' tool:
+
+![Create Map Picture #1](docs/images/create_map1.png)
+
+This can be clicked anywhere on the map that has already has been mapped (white
+pixels). Move around until the map is fully populated, i.e. all floors and
+walls/obstacles are mapped:
+
+![Create Map Picture #2](docs/images/create_map2.png)
+
+IN A NEW TERMINAL, run the following command to save the map you have created:
+```
+rosservice call /pal_map_manager/save_map "directory: ''"
+```
+
+This will save the map at ~/.pal/tiago_maps/config. Confirm it exists. Then,
+all terminals' processes can be stopped. Record the absolute file path that the
+map files are saved at, e.g. the output of the service call may look like:
+```
+success: True
+name: "2021-12-10_021714"
+full_path: "/home/lu18/.pal/tiago_dual_maps/"
+message: "Map saved: 2021-12-10_021714"
+```
+
+So you should record the path as the concatenation of the full path, its name,
+and another 'configurations' subdirectory
+```
+/home/lu18/.pal/tiago_dual_maps/configurations/2021-12-10_021714
+```
+
+#### Running a Demo of the Main Program
+
+Prerequisite: you have created a map as described in the previous section
+
+Launch the main program's configuration with the following command:
+```
+# Replace '/path/to/maps' with the path to the map data, the example in the
+# previous section was '/home/lu18/.pal/tiago_dual_maps/2021-12-10_021714'
+roslaunch enpm808x_final_inspection_robot main.launch map:="/path/to/maps"
+```
+
+This will start Gazebo with the specified map, RViz, multiple TIAGo
+nodes/utilities, and nodes created in this project. There are multiple optional
+arguments for this launch file:
+- view_image: '1' to also display the raw RGB image in a separate window, '0'
+  otherwise. Default value is '0'.
+- robot: The TIAGo robot model to use, either 'steel' or 'titanium'. Default
+  value is 'titanium'.
+- tiago_start_pose: The pose, relative to the world/map frame, to start the
+  TIAGo at. Default value is '-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0'.
+- extra_gazebo_args: Any additional arguments to also send to Gazebo. The
+  default value is none.
+
+Then, cans for inspection must be spawned. There is a demo launch file to spawn
+a fixed set of cans: 'demo.launch'. The launcher 'spawn_cans_from_list.launch'
+can be used to spawn a dynamically typed list. For example, this spawns three
+cans each with a couple of characteristics:
+```
+roslaunch enpm808x_final_inspection_robot spawn_cans_from_list.launch can_args_list:="1,1.0,1.0,0.0 : 0,2.0,1.0,0.0 : 1,-1.0,5.0,0.2"
+```
+
+The characteristics for each can are separated by a colon, and each individual
+characteristic is separated by a comma. These are as follows:
+- Whether the can is nominal (1) or defective (0).
+- The remaining three are the {x,y,z} coordinates of the initial spawn point,
+  in meters, relative to the map's coordinate system.
 
 ### Running the Tests
 
@@ -120,4 +255,10 @@ cd /path/to/tiago_ws/
 
 ### Generating Doxygen Docs
 
-**TODO**
+There is a Doxygen configuration file in the project's root directory,
+_.doxyfile_. The output is generated in the _docs/doxygen/_ directory. There is
+already sample documentation there, but updated documentation can be generated
+with the following command:
+```
+doxygen .doxyfile
+```

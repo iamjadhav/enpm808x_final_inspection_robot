@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
     <name>enpm808x_final_inspection_robot</name>
-    <version>0.0.0</version>
+    <version>1.0.0</version>
     <description>The implementation for the ENPM808X final, an inspection robot.</description>
     <maintainer email="rnvandemark@gmail.com">R. Nick Vandemark</maintainer>
     <license>Apache 2.0</license>
@@ -11,6 +11,7 @@
 
     <depend>roscpp</depend>
     <depend>message_generation</depend>
+    <depend>std_msgs</depend>
     <depend>geometry_msgs</depend>
     <depend>sensor_msgs</depend>
     <depend>actionlib</depend>

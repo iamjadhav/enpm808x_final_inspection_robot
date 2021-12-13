@@ -1,27 +1,37 @@
 <launch>
+    <!-- Before running this, make sure to run create_map.launch! See the
+         project README for more information. -->
+
+    <!-- argument required to be specified -->
+    <arg name="map" />
+
     <!-- argument(s) which can be overridden -->
-    <arg name="rviz" default="false" />
     <arg name="view_image" default="false" />
     <arg name="robot" default="titanium" />
     <arg name="tiago_start_pose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0" />
     <arg name="extra_gazebo_args" default="" />
+    <arg name="detection_pose_offset" default="-x 0.0 -y 0.0 -z -0.6 -R 0.0 -P 0.0 -Y -1.57079632" />
 
-    <!-- launch TIAGo mapping using our arguments, which:
+    <!-- launch TIAGo navigation using our arguments, which:
          - Runs the public simulation version (allows for multiple robot types
            and gmapping)
-         - Uses the world 'small_office', used as the demo for this project
+         - Uses the world 'small_office', used as the demo for this project,
+           and loads a map created by launch/create_map.launch (again, see the
+           project README for more information)
          - Spawns the robot at the specified Cartesian pose
          - Tucks in the arm on start
          - Optionally opens RViz of the navigation's sensing
     -->
-    <include file="$(find tiago_2dnav_gazebo)/launch/tiago_mapping.launch">
+    <include file="$(find tiago_2dnav_gazebo)/launch/tiago_navigation.launch">
         <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)" />
         <arg name="gzpose" value="$(arg tiago_start_pose)" />
+        <arg name="lost" value="false" />
+        <arg name="map" value="$(arg map)" />
         <arg name="namespace" value="/" />
         <arg name="public_sim" value="true" />
         <arg name="recording" value="false" />
         <arg name="robot" value="$(arg robot)" />
-        <arg name="rviz" value="$(arg rviz)" />
+        <arg name="rviz" value="true" />
         <arg name="tuck_arm" value="true" />
         <arg name="world" value="small_office" />
     </include>
@@ -33,4 +43,18 @@
           args="image:=/xtion/rgb/image_raw"
           if="$(arg view_image)"
     />
+
+    <!-- Start our custom nodes -->
+    <node name="inspection_controller"
+          pkg="enpm808x_final_inspection_robot"
+          type="inspection_controller"
+          output="screen"
+          respawn="false"
+          required="true"
+    />
+
+    <rosparam subst_value="True">
+        /enpm808x/home_position: $(arg tiago_start_pose)
+        /enpm808x/detection_pose_offset: $(arg detection_pose_offset)
+    </rosparam>
 </launch>

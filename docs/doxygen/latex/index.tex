@@ -1,0 +1,222 @@
+\href{https://app.travis-ci.com/rnvandemark/enpm808x_final_inspection_robot}{\tt } \href{https://coveralls.io/github/rnvandemark/enpm808x_final_inspection_robot?branch=master}{\tt }
+
+\subsection*{Project Overview/\+Description}
+
+{\bfseries T\+O\+DO}
+
+See the license for this project \href{LICENSE.txt}{\tt here}.
+
+\subsection*{Personnel}
+
+\subsubsection*{Aditya Jadhav}
+
+{\bfseries T\+O\+DO}
+
+\paragraph*{Abhishek Nalawade}
+
+{\bfseries T\+O\+DO}
+
+\paragraph*{R. Nick Vandemark}
+
+{\bfseries T\+O\+DO}
+
+\subsection*{License}
+
+{\bfseries T\+O\+DO}
+
+\subsection*{Links to Agile Iterative Process (A\+IP) Products}
+
+To Project Backlog (Product Backlog, Iteration Backlogs, and Work Log)\+:
+
+\href{https://docs.google.com/spreadsheets/d/1DmnGjTfYCdlwXq4yxJ25zSwCLq8LcW4DftqtF5_p5Tk/edit?usp=sharing}{\tt https\+://docs.\+google.\+com/spreadsheets/d/1\+Dmn\+Gj\+Tf\+Y\+Cdlw\+Xq4yx\+J25z\+Sw\+C\+Lq8\+Lc\+W4\+Dftqt\+F5\+\_\+p5\+Tk/edit?usp=sharing}
+
+To Sprint Planning Notes/\+Review\+:
+
+\href{https://docs.google.com/document/d/1JHqd9Alk2kZUKKPmb6cLGOPEvR-gZKouV5svNGUF8SE/edit?usp=sharing}{\tt https\+://docs.\+google.\+com/document/d/1\+J\+Hqd9\+Alk2k\+Z\+U\+K\+K\+Pmb6c\+L\+G\+O\+P\+Ev\+R-\/g\+Z\+Kou\+V5sv\+N\+G\+U\+F8\+S\+E/edit?usp=sharing}
+
+Furthermore, see the \char`\"{}\+U\+M\+L\char`\"{} directory of this package for U\+ML files, and Proposal deliverables of the initial proposal in the \char`\"{}\+Proposal\char`\"{} directory.
+
+\subsection*{Known Issues/\+Bugs}
+
+{\bfseries T\+O\+DO}
+
+\subsection*{Dependencies}
+
+The following should install all of the required packages (assuming the proper sources have been declared, see \href{http://wiki.ros.org/melodic/Installation/Ubuntu}{\tt R\+OS Melodic installation} otherwise)\+: 
+\begin{DoxyCode}
+sudo apt-get update
+sudo apt-get install git python-rosinstall ros-melodic-desktop-full python-catkin-tools
+       ros-melodic-joint-state-controller ros-melodic-twist-mux ros-melodic-ompl ros-melodic-controller-manager
+       ros-melodic-moveit-core ros-melodic-moveit-ros-perception ros-melodic-moveit-ros-move-group ros-melodic-moveit-kinematics
+       ros-melodic-moveit-ros-planning-interface ros-melodic-moveit-simple-controller-manager
+       ros-melodic-moveit-planners-ompl ros-melodic-joy ros-melodic-joy-teleop ros-melodic-teleop-tools ros-melodic-control-toolbox
+       ros-melodic-sound-play ros-melodic-navigation ros-melodic-depthimage-to-laserscan ros-melodic-moveit-commander
+\end{DoxyCode}
+
+
+\subsection*{How to}
+
+\subsubsection*{Setting Up Your Workspace}
+
+
+\begin{DoxyItemize}
+\item Create a catkin workspace and its src directory at e.\+g. /path/to/tiago\+\_\+ws/src
+\item Clone this package into the src directory\+: 
+\begin{DoxyCode}
+cd /path/to/tiago\_ws/src
+git clone https://github.com/rnvandemark/enpm808x\_final\_inspection\_robot.git
+\end{DoxyCode}
+
+\item Navigate to the catkin workspace\+: 
+\begin{DoxyCode}
+cd /path/to/tiago\_ws/
+\end{DoxyCode}
+
+\item Use rosinstall to download additional packages into your workspace, using the additional dependencies declare in this repository\textquotesingle{}s rosinstall file\+: 
+\begin{DoxyCode}
+# If needed, replace 'enpm808x\_final\_inspection\_robot' with the local name you
+# gave this repository
+rosinstall src /opt/ros/melodic src/enpm808x\_final\_inspection\_robot/dependencies.rosinstall
+\end{DoxyCode}
+
+\item Set up rosdep and ensure any missing dependencies required by this workspace are met/installed\+: 
+\begin{DoxyCode}
+sudo rosdep init
+rosdep update
+cd /path/to/tiago\_ws/
+rosdep install --from-paths src --ignore-src -y --rosdistro melodic --skip-keys="opencv2 opencv2-nonfree
+       pal\_laser\_filters speed\_limit\_node sensor\_to\_cloud hokuyo\_node libdw-dev python-graphitesend-pip python-statsd
+       pal\_filters pal\_vo\_server pal\_usb\_utils pal\_pcl pal\_pcl\_points\_throttle\_and\_filter pal\_karto
+       pal\_local\_joint\_control camera\_calibration\_files pal\_startup\_msgs pal-orbbec-openni2 dummy\_actuators\_manager
+       pal\_local\_planner gravity\_compensation\_controller current\_limit\_controller dynamic\_footprint dynamixel\_cpp tf\_lookup
+       opencv3 joint\_impedance\_trajectory\_controller cartesian\_impedance\_controller omni\_base\_description
+       omni\_drive\_controller"
+\end{DoxyCode}
+
+\item Optionally, add this to $\sim$/.bashrc (and resource as necessary) to restrict message generation for extra languages\+: 
+\begin{DoxyCode}
+export ROS\_LANG\_DISABLE=genlisp:gennodejs:geneus
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\subsubsection*{Building the Program and Tests}
+
+\paragraph*{Building the Package}
+
+
+\begin{DoxyItemize}
+\item Prerequisite\+: you have set up your workspace as described in the previous section, assuming the catkin workspace at e.\+g. /path/to/tiago\+\_\+ws/
+\item Navigate to the catkin workspace and build with the build script\+: 
+\begin{DoxyCode}
+cd /path/to/tiago\_ws/
+./src/enpm808x\_final\_inspection\_robot/bin/build-ws.sh
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\paragraph*{Building the Tests}
+
+The tests for this package are automatically built with the aforementioned build script, build-\/ws.\+sh. See the \textquotesingle{}Building the Package\textquotesingle{} section.
+
+\subsubsection*{Running a Sample of the Program}
+
+There are two steps to running the program. The first step, building a digital map of the environment, only has to be done once (but can be done multiple times). Then, every time the \textquotesingle{}main\textquotesingle{} program is ran, it will use the saved map. There are launch files for each of these routines.
+
+
+\begin{DoxyItemize}
+\item Prerequisites\+:
+\begin{DoxyItemize}
+\item You have set up your workspace as described in the \textquotesingle{}Setting Up Your Workspace\textquotesingle{} section, assuming the catkin workspace at e.\+g. /path/to/tiago\+\_\+ws/
+\item You have built the package as described in the \textquotesingle{}Building the Package\textquotesingle{} section
+\end{DoxyItemize}
+\item For each terminal opened, make sure your R\+OS installation and this workspace are sourced, for example\+: 
+\begin{DoxyCode}
+source /opt/ros/melodic/setup.bash
+source /path/to/tiago\_ws/install\_isolated/setup.bash
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\paragraph*{Creating a Map of the Environment}
+
+First, launch the mapping configuration with the following command\+: 
+\begin{DoxyCode}
+roslaunch enpm808x\_final\_inspection\_robot create\_map.launch
+\end{DoxyCode}
+
+
+This will start Gazebo, R\+Viz, and multiple T\+I\+A\+Go nodes/utilities. The map is initially empty, and we will have the T\+I\+A\+Go navigate around the environment to build it. To move the robot around, navigate to the R\+Viz window and use the \textquotesingle{}2D Nav Goal\textquotesingle{} tool\+:
+
+
+
+This can be clicked anywhere on the map that has already has been mapped (white pixels). Move around until the map is fully populated, i.\+e. all floors and walls/obstacles are mapped\+:
+
+
+
+IN A N\+EW T\+E\+R\+M\+I\+N\+AL, run the following command to save the map you have created\+: 
+\begin{DoxyCode}
+rosservice call /pal\_map\_manager/save\_map "directory: ''"
+\end{DoxyCode}
+
+
+This will save the map at $\sim$/.pal/tiago\+\_\+maps/config. Confirm it exists. Then, all terminals\textquotesingle{} processes can be stopped. Record the absolute file path that the map files are saved at, e.\+g. the output of the service call may look like\+: 
+\begin{DoxyCode}
+success: True
+name: "2021-12-10\_021714"
+full\_path: "/home/lu18/.pal/tiago\_dual\_maps/"
+message: "Map saved: 2021-12-10\_021714"
+\end{DoxyCode}
+
+
+So you should record the path as the concatenation of the full path, its name, and another \textquotesingle{}configurations\textquotesingle{} subdirectory 
+\begin{DoxyCode}
+/home/lu18/.pal/tiago\_dual\_maps/configurations/2021-12-10\_021714
+\end{DoxyCode}
+
+
+\paragraph*{Running a Demo of the Main Program}
+
+Prerequisite\+: you have created a map as described in the previous section
+
+Launch the main program\textquotesingle{}s configuration with the following command\+: 
+\begin{DoxyCode}
+# Replace '/path/to/maps' with the path to the map data, the example in the
+# previous section was '/home/lu18/.pal/tiago\_dual\_maps/2021-12-10\_021714'
+roslaunch enpm808x\_final\_inspection\_robot main.launch map:="/path/to/maps"
+\end{DoxyCode}
+
+
+This will start Gazebo with the specified map, R\+Viz, multiple T\+I\+A\+Go nodes/utilities, and nodes created in this project. There are multiple optional arguments for this launch file\+:
+\begin{DoxyItemize}
+\item view\+\_\+image\+: \textquotesingle{}1\textquotesingle{} to also display the raw R\+GB image in a separate window, \textquotesingle{}0\textquotesingle{} otherwise. Default value is \textquotesingle{}0\textquotesingle{}.
+\item robot\+: The T\+I\+A\+Go robot model to use, either \textquotesingle{}steel\textquotesingle{} or \textquotesingle{}titanium\textquotesingle{}. Default value is \textquotesingle{}titanium\textquotesingle{}.
+\item tiago\+\_\+start\+\_\+pose\+: The pose, relative to the world/map frame, to start the T\+I\+A\+Go at. Default value is \textquotesingle{}-\/x 0.\+0 -\/y 0.\+0 -\/z 0.\+0 -\/R 0.\+0 -\/P 0.\+0 -\/Y 0.\+0\textquotesingle{}.
+\item extra\+\_\+gazebo\+\_\+args\+: Any additional arguments to also send to Gazebo. The default value is none.
+\end{DoxyItemize}
+
+Then, cans for inspection must be spawned. There is a demo launch file to spawn a fixed set of cans\+: \textquotesingle{}demo.\+launch\textquotesingle{}. The launcher \textquotesingle{}spawn\+\_\+cans\+\_\+from\+\_\+list.\+launch\textquotesingle{} can be used to spawn a dynamically typed list. For example, this spawns three cans each with a couple of characteristics\+: 
+\begin{DoxyCode}
+roslaunch enpm808x\_final\_inspection\_robot spawn\_cans\_from\_list.launch can\_args\_list:="1,1.0,1.0,0.0 :
+       0,2.0,1.0,0.0 : 1,-1.0,5.0,0.2"
+\end{DoxyCode}
+
+
+The characteristics for each can are separated by a colon, and each individual characteristic is separated by a comma. These are as follows\+:
+\begin{DoxyItemize}
+\item Whether the can is nominal (1) or defective (0).
+\item The remaining three are the \{x,y,z\} coordinates of the initial spawn point, in meters, relative to the map\textquotesingle{}s coordinate system.
+\end{DoxyItemize}
+
+\subsubsection*{Running the Tests}
+
+The tests for this package can be ran by navigating to the project workspace directory and running the helper script\+: 
+\begin{DoxyCode}
+cd /path/to/tiago\_ws/
+./src/enpm808x\_final\_inspection\_robot/bin/run-tests.sh
+\end{DoxyCode}
+
+
+\subsubsection*{Generating Doxygen Docs}
+
+{\bfseries T\+O\+DO} 

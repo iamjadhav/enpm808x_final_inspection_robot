@@ -1,0 +1,130 @@
+\hypertarget{classInspectionController}{}\section{Inspection\+Controller Class Reference}
+\label{classInspectionController}\index{Inspection\+Controller@{Inspection\+Controller}}
+
+
+{\ttfamily \#include $<$Inspection\+Controller.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classInspectionController_a80159b0d7e354ed3d2a11a965fecc76b}{Inspection\+Controller} (ros\+::\+Node\+Handle \&nh, const geometry\+\_\+msgs\+::\+Pose \&home\+\_\+position, const tf\+::\+Transform \&detection\+\_\+pose\+\_\+offset)
+\item 
+\hyperlink{classInspectionController_a5090f9c7c12f1f392c931142f61dc5f5}{$\sim$\+Inspection\+Controller} ()
+\item 
+void \hyperlink{classInspectionController_ac797dd6e2b73f69faeea79c68040ff80}{handle\+Arm\+Trajectory\+Result} (const control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Action\+Result\+Const\+Ptr \&msg)
+\item 
+void \hyperlink{classInspectionController_ae4eedafe47b2ef66b4e2b94030d1a5c7}{handle\+Move\+Base\+Result} (const actionlib\+::\+Simple\+Client\+Goal\+State \&state, const move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Result\+Const\+Ptr \&msg)
+\item 
+void \hyperlink{classInspectionController_af63cab2f6a58cea872a5114fc12a184f}{handle\+Rgb\+Image\+Update} (const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&msg)
+\item 
+void \hyperlink{classInspectionController_a0be5ef625b1ef85a9bbc3aed29436d31}{handle\+Point\+Cloud\+Update} (const sensor\+\_\+msgs\+::\+Point\+Cloud2\+Const\+Ptr \&msg)
+\item 
+void \hyperlink{classInspectionController_a06e3e7749ede8c15dfff60ebbd5c5d79}{inspect} (const std\+::vector$<$ tf\+::\+Vector3 $>$ \&new\+\_\+expected\+\_\+can\+\_\+positions)
+\item 
+bool \hyperlink{classInspectionController_a6be39aa4b5e8b6ea62b1b90285c7ff64}{is\+Arm\+Tucked} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The main controller for the inspection process pipeline, which helps to communicate objectives and status on the R\+OS network. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classInspectionController_a80159b0d7e354ed3d2a11a965fecc76b}\label{classInspectionController_a80159b0d7e354ed3d2a11a965fecc76b}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!Inspection\+Controller@{Inspection\+Controller}}
+\index{Inspection\+Controller@{Inspection\+Controller}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{Inspection\+Controller()}{InspectionController()}}
+{\footnotesize\ttfamily Inspection\+Controller\+::\+Inspection\+Controller (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh,  }\item[{const geometry\+\_\+msgs\+::\+Pose \&}]{home\+\_\+position,  }\item[{const tf\+::\+Transform \&}]{detection\+\_\+pose\+\_\+offset }\end{DoxyParamCaption})}
+
+Sole constructor. 
+\begin{DoxyParams}{Parameters}
+{\em nh} & The handle to the R\+OS node. \\
+\hline
+{\em home\+\_\+position} & The T\+I\+A\+Go robot\textquotesingle{}s home position. \\
+\hline
+{\em detection\+\_\+pose\+\_\+offset} & The constant offset for the detection pose. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classInspectionController_a5090f9c7c12f1f392c931142f61dc5f5}\label{classInspectionController_a5090f9c7c12f1f392c931142f61dc5f5}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!````~Inspection\+Controller@{$\sim$\+Inspection\+Controller}}
+\index{````~Inspection\+Controller@{$\sim$\+Inspection\+Controller}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{$\sim$\+Inspection\+Controller()}{~InspectionController()}}
+{\footnotesize\ttfamily Inspection\+Controller\+::$\sim$\+Inspection\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classInspectionController_ac797dd6e2b73f69faeea79c68040ff80}\label{classInspectionController_ac797dd6e2b73f69faeea79c68040ff80}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!handle\+Arm\+Trajectory\+Result@{handle\+Arm\+Trajectory\+Result}}
+\index{handle\+Arm\+Trajectory\+Result@{handle\+Arm\+Trajectory\+Result}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{handle\+Arm\+Trajectory\+Result()}{handleArmTrajectoryResult()}}
+{\footnotesize\ttfamily void Inspection\+Controller\+::handle\+Arm\+Trajectory\+Result (\begin{DoxyParamCaption}\item[{const control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Action\+Result\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+Callback for the T\+I\+A\+Go\textquotesingle{}s arm trajectory action\textquotesingle{}s results. 
+\begin{DoxyParams}{Parameters}
+{\em msg} & The result of the requested arm trajectory action. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classInspectionController_ae4eedafe47b2ef66b4e2b94030d1a5c7}\label{classInspectionController_ae4eedafe47b2ef66b4e2b94030d1a5c7}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!handle\+Move\+Base\+Result@{handle\+Move\+Base\+Result}}
+\index{handle\+Move\+Base\+Result@{handle\+Move\+Base\+Result}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{handle\+Move\+Base\+Result()}{handleMoveBaseResult()}}
+{\footnotesize\ttfamily void Inspection\+Controller\+::handle\+Move\+Base\+Result (\begin{DoxyParamCaption}\item[{const actionlib\+::\+Simple\+Client\+Goal\+State \&}]{state,  }\item[{const move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Result\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+Callback for the T\+I\+A\+Go\textquotesingle{}s arm trajectory action\textquotesingle{}s results. 
+\begin{DoxyParams}{Parameters}
+{\em state} & The simple action client result. \\
+\hline
+{\em msg} & The result of the requested arm trajectory action. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classInspectionController_a0be5ef625b1ef85a9bbc3aed29436d31}\label{classInspectionController_a0be5ef625b1ef85a9bbc3aed29436d31}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!handle\+Point\+Cloud\+Update@{handle\+Point\+Cloud\+Update}}
+\index{handle\+Point\+Cloud\+Update@{handle\+Point\+Cloud\+Update}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{handle\+Point\+Cloud\+Update()}{handlePointCloudUpdate()}}
+{\footnotesize\ttfamily void Inspection\+Controller\+::handle\+Point\+Cloud\+Update (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::\+Point\+Cloud2\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+Callback for an updated depth field captured by the T\+I\+A\+Go robot. 
+\begin{DoxyParams}{Parameters}
+{\em msg} & The updated depth field. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classInspectionController_af63cab2f6a58cea872a5114fc12a184f}\label{classInspectionController_af63cab2f6a58cea872a5114fc12a184f}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!handle\+Rgb\+Image\+Update@{handle\+Rgb\+Image\+Update}}
+\index{handle\+Rgb\+Image\+Update@{handle\+Rgb\+Image\+Update}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{handle\+Rgb\+Image\+Update()}{handleRgbImageUpdate()}}
+{\footnotesize\ttfamily void Inspection\+Controller\+::handle\+Rgb\+Image\+Update (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+Callback for an updated R\+GB image captured by the T\+I\+A\+Go robot. 
+\begin{DoxyParams}{Parameters}
+{\em msg} & The updated R\+GB image. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classInspectionController_a06e3e7749ede8c15dfff60ebbd5c5d79}\label{classInspectionController_a06e3e7749ede8c15dfff60ebbd5c5d79}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!inspect@{inspect}}
+\index{inspect@{inspect}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{inspect()}{inspect()}}
+{\footnotesize\ttfamily void Inspection\+Controller\+::inspect (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ tf\+::\+Vector3 $>$ \&}]{new\+\_\+expected\+\_\+can\+\_\+positions }\end{DoxyParamCaption})}
+
+Set the list of expected can positions, then kickstart the pipeline with the first value in the last. 
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+expected\+\_\+can\+\_\+positions} & The ordered list of expected, approximate can positions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the provided list is valid and the pipeline has begun. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classInspectionController_a6be39aa4b5e8b6ea62b1b90285c7ff64}\label{classInspectionController_a6be39aa4b5e8b6ea62b1b90285c7ff64}} 
+\index{Inspection\+Controller@{Inspection\+Controller}!is\+Arm\+Tucked@{is\+Arm\+Tucked}}
+\index{is\+Arm\+Tucked@{is\+Arm\+Tucked}!Inspection\+Controller@{Inspection\+Controller}}
+\subsubsection{\texorpdfstring{is\+Arm\+Tucked()}{isArmTucked()}}
+{\footnotesize\ttfamily bool Inspection\+Controller\+::is\+Arm\+Tucked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for whether the T\+I\+A\+Go arm has been tucked in yet or not. \begin{DoxyReturn}{Returns}
+Whether or not the T\+I\+A\+Go has finished tucking its arm in. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\hyperlink{InspectionController_8hpp}{Inspection\+Controller.\+hpp}\item 
+src/\hyperlink{InspectionController_8cpp}{Inspection\+Controller.\+cpp}\end{DoxyCompactItemize}
