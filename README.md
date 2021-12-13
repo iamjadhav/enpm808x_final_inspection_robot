@@ -34,7 +34,14 @@ inspection.
 
 #### R. Nick Vandemark
 
-**TODO**
+Nick graduated from his undergraduate program in the summer of 2019 with a
+skillset in computer engineering, software engineering, mathematics, and
+physics. He was a robotics engineer at a collaborative robotics startup for two
+years, and has been a contractor for NASA as a robotics software engineer for
+the last 1.5 years. Seeking a formal education in it, he is also about halfway
+through the robotics engineering program at UMD, in order to strengthen his
+otherwise self-taught background. His hobbies include creating software, rock
+climbing, snowboarding, bonfires, and, more recently, 3D modeling.
 
 ## License
 
