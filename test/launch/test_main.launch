@@ -2,6 +2,7 @@
     <!-- Sleep for XXX seconds before starting the test to allow for Gazebo to
          launch and for all of its connections to be made -->
     <arg name="test_sleep" default="25.0" />
+    <!--param name="image" value="$(find enpm808x_final_inspection_robot)/test.jpeg"/-->
     <include file="$(find enpm808x_final_inspection_robot)/launch/main.launch">
         <arg name="view_image" value="false" />
         <arg name="robot" value="titanium" />
@@ -17,4 +18,5 @@
           type="test_main"
           launch-prefix="bash -c 'sleep $(arg test_sleep); $0 $@' "
     />
+    
 </launch>
