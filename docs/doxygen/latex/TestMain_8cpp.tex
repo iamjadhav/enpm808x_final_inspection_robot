@@ -1,0 +1,88 @@
+\hypertarget{TestMain_8cpp}{}\section{test/\+Test\+Main.cpp File Reference}
+\label{TestMain_8cpp}\index{test/\+Test\+Main.\+cpp@{test/\+Test\+Main.\+cpp}}
+
+
+The testing suite\textquotesingle{}s entry point.  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$ros/package.\+h$>$}\newline
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/image\+\_\+encodings.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$opencv2/opencv.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}cv\+\_\+bridge/cv\+\_\+bridge.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\+Localize\+Can.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\+Inspect\+Can.\+h\char`\"{}}\newline
+Include dependency graph for Test\+Main.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{TestMain_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{TestMain_8cpp_a22715320dea6bd3070869d1ff04f398a}{T\+E\+ST} (Inspect\+Can\+Test, Test\+\_\+\+Inspect\+\_\+can)
+\item 
+\hyperlink{TestMain_8cpp_a4de53239e0168ea2bf104003f13f9fc2}{T\+E\+ST} (Handle\+\_\+\+Inspect\+Can, Test\+\_\+\+Inspection\+Can\+\_\+callback)
+\item 
+\mbox{\Hypertarget{TestMain_8cpp_a26e30743d23b8ec75c157a2f238e85fb}\label{TestMain_8cpp_a26e30743d23b8ec75c157a2f238e85fb}} 
+{\bfseries T\+E\+ST} (T\+E\+S\+T\+Suite, test\+Main)
+\item 
+\hyperlink{TestMain_8cpp_a018004d92704a8a93a524515062ba98b}{T\+E\+ST} (Localize\+Can\+Test, Test\+\_\+\+Localize\+Can\+\_\+\+Existence)
+\item 
+\mbox{\Hypertarget{TestMain_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{TestMain_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{TestMain_8cpp_afbb7c6b17cf5b1463c6d18f09e6eb70e}\label{TestMain_8cpp_afbb7c6b17cf5b1463c6d18f09e6eb70e}} 
+std\+::unique\+\_\+ptr$<$ ros\+::\+Node\+Handle $>$ {\bfseries nh}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The testing suite\textquotesingle{}s entry point. 
+
+\begin{DoxyAuthor}{Author}
+Robert Vandemark 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2021-\/12-\/06
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright 2021 Robert Vandemark, Aditya Jadhav, Abhishek Nalawade
+\end{DoxyCopyright}
+Licensed under the Apache License, Version 2.\+0 (the \char`\"{}\+License\char`\"{}); you may not use this file except in compliance with the License. You may obtain a copy of the License at \begin{DoxyVerb}  http://www.apache.org/licenses/LICENSE-2.0
+\end{DoxyVerb}
+
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \char`\"{}\+A\+S I\+S\char`\"{} B\+A\+S\+IS, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+T\+I\+ES OR C\+O\+N\+D\+I\+T\+I\+O\+NS OF A\+NY K\+I\+ND, either express or implied. See the License for the specific language governing permissions and limitations under the License. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{TestMain_8cpp_a22715320dea6bd3070869d1ff04f398a}\label{TestMain_8cpp_a22715320dea6bd3070869d1ff04f398a}} 
+\index{Test\+Main.\+cpp@{Test\+Main.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Test\+Main.\+cpp@{Test\+Main.\+cpp}}
+\subsubsection{\texorpdfstring{T\+E\+S\+T()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Inspect\+Can\+Test}]{,  }\item[{Test\+\_\+\+Inspect\+\_\+can}]{ }\end{DoxyParamCaption})}
+
+Simple Existence Test for the Inspect\+Can Service. \mbox{\Hypertarget{TestMain_8cpp_a4de53239e0168ea2bf104003f13f9fc2}\label{TestMain_8cpp_a4de53239e0168ea2bf104003f13f9fc2}} 
+\index{Test\+Main.\+cpp@{Test\+Main.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Test\+Main.\+cpp@{Test\+Main.\+cpp}}
+\subsubsection{\texorpdfstring{T\+E\+S\+T()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Handle\+\_\+\+Inspect\+Can}]{,  }\item[{Test\+\_\+\+Inspection\+Can\+\_\+callback}]{ }\end{DoxyParamCaption})}
+
+Testing the inspect can service callback function handle\+Inspect\+Can\+Request \mbox{\Hypertarget{TestMain_8cpp_a018004d92704a8a93a524515062ba98b}\label{TestMain_8cpp_a018004d92704a8a93a524515062ba98b}} 
+\index{Test\+Main.\+cpp@{Test\+Main.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Test\+Main.\+cpp@{Test\+Main.\+cpp}}
+\subsubsection{\texorpdfstring{T\+E\+S\+T()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Localize\+Can\+Test}]{,  }\item[{Test\+\_\+\+Localize\+Can\+\_\+\+Existence}]{ }\end{DoxyParamCaption})}
+
+Simple Existence Test for the Localize\+Can Service. 
