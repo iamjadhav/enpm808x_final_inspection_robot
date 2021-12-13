@@ -62,7 +62,28 @@ deliverables of the initial proposal in the "Proposal" directory.
 
 ## Known Issues/Bugs
 
-**TODO**
+### System-Level Issues
+
+- [ ] The controller API provided here is tightly bound to ROS and Gazebo. This
+  may be acceptable considering the TIAGo utilities are as well, but there it'd
+  be beneficial to explore decoupling this controller from ROS utilities.
+- [ ] The CanCharacterizer class unfortunately remains unimplemented. The main
+      controller has stubbed out its interaction with this node for now and can
+      move as would be expected during the actual inspection routine, but no
+      inspection is performed at the moment.
+- [ ] The automated build jobs, including the tests, take a while to finish
+      because a lot of packages are built from source. Many of these are
+      possibly unnecessary for this package's intentions and could be removed
+      as dependencies. This was put off for the future in the interest of time.
+
+### Small Bugs / Issues to Note
+
+- [ ] The frames for the RGB camera and depth sensor are assumed to be the
+  same, but this is not true in reality. There is a very slight,
+  one-dimensional, translational offset that should really be accounted for.
+- [ ] There could be more intensive integration tests put in place, but were
+  put off as future work in the interest of time. Especially considering the
+  automated builds and tests already take a while.
 
 ## Dependencies
 
