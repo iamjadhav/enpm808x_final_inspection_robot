@@ -7,8 +7,6 @@
 
 **TODO**
 
-See the license for this project [here](LICENSE.txt).
-
 ## Personnel
 
 ### Aditya Jadhav
@@ -25,7 +23,7 @@ See the license for this project [here](LICENSE.txt).
 
 ## License
 
-**TODO**
+See the license for this project [here](LICENSE.txt).
 
 ## Links to Agile Iterative Process (AIP) Products
 
