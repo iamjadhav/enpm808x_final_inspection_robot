@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
     message_generation
     roscpp
     actionlib
+    std_msgs
     geometry_msgs
     sensor_msgs
     control_msgs
@@ -22,6 +23,10 @@ add_service_files(
     DIRECTORY srv
     FILES InspectCan.srv LocalizeCan.srv
 )
+add_message_files(
+    DIRECTORY msg
+    FILES InspectionMetrics.msg
+)
 generate_messages(DEPENDENCIES geometry_msgs sensor_msgs)
 
 catkin_package(
@@ -36,6 +41,7 @@ include_directories(
 
 add_executable(inspection_controller src/InspectionControllerNode.cpp src/InspectionController.cpp)
 target_link_libraries(inspection_controller ${catkin_LIBRARIES})
+add_dependencies(inspection_controller enpm808x_final_inspection_robot_generate_messages_cpp)
 
 add_executable(can_characterizer src/CanCharacterizer.cpp src/CanCharacterizerNode.cpp)
 target_link_libraries(can_characterizer ${catkin_LIBRARIES})

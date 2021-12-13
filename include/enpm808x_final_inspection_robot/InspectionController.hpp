@@ -26,21 +26,27 @@
 #include <ros/service_client.h>
 #include <ros/subscriber.h>
 #include <actionlib/client/simple_action_client.h>
+#include <actionlib/client/simple_client_goal_state.h>
 
 #include <move_base_msgs/MoveBaseAction.h>
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <control_msgs/FollowJointTrajectoryActionResult.h>
 
+#include <tf/transform_listener.h>
 #include <tf/LinearMath/Transform.h>
 #include <tf/LinearMath/Vector3.h>
 
 #include <memory>
+#include <queue>
 #include <vector>
+
+#include "enpm808x_final_inspection_robot/InspectionMetrics.h"
 
 // Definitions to make common names shorter
 template <typename T> using uptr = std::unique_ptr<T>;
-template <typename T> using ActionClient = actionlib::SimpleActionClient<T>;
+using MoveBaseActionCli
+    = actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>;
 
 /**
  * The main controller for the inspection process pipeline, which helps to
@@ -59,13 +65,7 @@ class InspectionController {
      * Client to the action that handles requests to move the base of the TIAGo
      * robot to an objective pose.
      */
-    uptr<ActionClient<move_base_msgs::MoveBaseAction>> move_base_cli;
-
-    /**
-     * Subscriber for results of move base actions. This describes whether or
-     * not objective poses were reached.
-     */
-    uptr<ros::Subscriber> move_base_result_sub;
+    uptr<MoveBaseActionCli> move_base_cli;
 
     /**
      * Client to the service which uses a given image to find a can and
@@ -92,6 +92,21 @@ class InspectionController {
     uptr<ros::Subscriber> point_cloud_sub;
 
     /**
+     * Publisher for metrics of each can inspected.
+     */
+    uptr<ros::Publisher> inspection_metrics_pub;
+
+    /**
+     * Publisher to inform others that inspection of all cans is finished.
+     */
+    uptr<ros::Publisher> inspection_finished_pub;
+    
+    /**
+     * The transform listener used to get tf data.
+     */
+    uptr<tf::TransformListener> tf_listener;
+
+    /**
      * The TIAGo robot's home position.
      */
     const geometry_msgs::Pose home_position;
@@ -102,14 +117,47 @@ class InspectionController {
     const tf::Transform detection_pose_offset;
 
     /**
+     * The transformation describing the robot's camera frame with respect to
+     * its base frame. Assume it is constant, do not change it outside of the
+     * constructor.
+     */
+    tf::StampedTransform transform_0C;
+
+    /**
      * The approximate expected positions of all cans that should be inspected.
      */
-    std::vector<tf::Vector3> expected_can_positions;
+    std::queue<tf::Vector3> expected_can_positions;
+
+    /**
+     * The last heard RGB image, used when requesting can inspection.
+     */
+    sensor_msgs::Image last_rgb_image;
+
+    /**
+     * The last heard point cloud, used when requesting can localization.
+     */
+    sensor_msgs::PointCloud2 last_point_cloud;
+
+    /**
+     * A constant bound function, to be supplied to move base goals.
+     */
+    const MoveBaseActionCli::SimpleDoneCallback move_base_result_cb;
 
     /**
      * Whether or not the TIAGo has finished tucking its arm in.
      */
     bool arm_tucked;
+
+    /**
+     * Whether or not the current move request is to the home position.
+     */
+    bool is_going_home;
+
+    /**
+     * The metrics being captured during the current inspection pipeline's
+     * iteration.
+     */
+    enpm808x_final_inspection_robot::InspectionMetrics current_metrics;
 
     /**
      * Helper function to package an objective pose into a goal for the move
@@ -118,13 +166,32 @@ class InspectionController {
      */
     void requestMoveBaseActionGoal(const geometry_msgs::Pose& pose);
 
+    /**
+     * Helper function to package an objective can position into a goal for the
+     * move base action server.
+     * @param position_WDi The expected position of the (possibly) defective
+     * can resolved in the world frame.
+     */
+    void requestMoveBaseActionGoalFromCanPosition(const tf::Vector3& position_WDi);
+
+    /**
+     * Perform any final tasks in an iteration of the inspection pipeline. This
+     * includes writing the value of @a current_metrics out and resetting its
+     * value for the next iteration, as well as requesting the next motion
+     * (either to the can expected can position or, if none left, the home
+     * position).
+     */
+    void finishPipelineIteration();
+
  public:
     /**
      * Sole constructor.
+     * @param nh The handle to the ROS node.
      * @param home_position The TIAGo robot's home position.
      * @param detection_pose_offset The constant offset for the detection pose.
      */
-    InspectionController(const geometry_msgs::Pose& home_position,
+    InspectionController(ros::NodeHandle& nh,
+                         const geometry_msgs::Pose& home_position,
                          const tf::Transform& detection_pose_offset);
 
     /**
@@ -141,10 +208,12 @@ class InspectionController {
 
     /**
      * Callback for the TIAGo's arm trajectory action's results.
+     * @param state The simple action client result.
      * @param msg The result of the requested arm trajectory action.
      */
     void handleMoveBaseResult(
-        const move_base_msgs::MoveBaseActionResultConstPtr& msg);
+        const actionlib::SimpleClientGoalState& state,
+        const move_base_msgs::MoveBaseResultConstPtr& msg);
 
     /**
      * Callback for an updated RGB image captured by the TIAGo robot.
@@ -157,6 +226,15 @@ class InspectionController {
      * @param msg The updated depth field.
      */
     void handlePointCloudUpdate(const sensor_msgs::PointCloud2ConstPtr& msg);
+
+    /**
+     * Set the list of expected can positions, then kickstart the pipeline with
+     * the first value in the last.
+     * @param new_expected_can_positions The ordered list of expected,
+     * approximate can positions.
+     * @return Whether the provided list is valid and the pipeline has begun.
+     */
+    void inspect(const std::vector<tf::Vector3>& new_expected_can_positions);
 
     /**
      * Getter for whether the TIAGo arm has been tucked in yet or not.

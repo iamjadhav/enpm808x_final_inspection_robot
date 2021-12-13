@@ -107,7 +107,101 @@ build script, build-ws.sh. See the 'Building the Package' section.
 
 ### Running a Sample of the Program
 
-**TODO**
+There are two steps to running the program. The first step, building a digital
+map of the environment, only has to be done once (but can be done multiple
+times). Then, every time the 'main' program is ran, it will use the saved map.
+There are launch files for each of these routines.
+
+- Prerequisites:
+  - You have set up your workspace as described in the 'Setting Up Your
+    Workspace' section, assuming the catkin workspace at e.g.
+    /path/to/tiago_ws/
+  - You have built the package as described in the 'Building the Package'
+    section
+- For each terminal opened, make sure your ROS installation and this workspace
+  are sourced, for example:
+```
+source /opt/ros/melodic/setup.bash
+source /path/to/tiago_ws/install_isolated/setup.bash
+```
+
+#### Creating a Map of the Environment
+
+First, launch the mapping configuration with the following command:
+```
+roslaunch enpm808x_final_inspection_robot create_map.launch
+```
+
+This will start Gazebo, RViz, and multiple TIAGo nodes/utilities. The map is
+initially empty, and we will have the TIAGo navigate around the environment to
+build it. To move the robot around, navigate to the RViz window and use the '2D
+Nav Goal' tool:
+
+![Create Map Picture #1](docs/images/create_map1.png)
+
+This can be clicked anywhere on the map that has already has been mapped (white
+pixels). Move around until the map is fully populated, i.e. all floors and
+walls/obstacles are mapped:
+
+![Create Map Picture #2](docs/images/create_map2.png)
+
+IN A NEW TERMINAL, run the following command to save the map you have created:
+```
+rosservice call /pal_map_manager/save_map "directory: ''"
+```
+
+This will save the map at ~/.pal/tiago_maps/config. Confirm it exists. Then,
+all terminals' processes can be stopped. Record the absolute file path that the
+map files are saved at, e.g. the output of the service call may look like:
+```
+success: True
+name: "2021-12-10_021714"
+full_path: "/home/lu18/.pal/tiago_dual_maps/"
+message: "Map saved: 2021-12-10_021714"
+```
+
+So you should record the path as the concatenation of the full path, its name,
+and another 'configurations' subdirectory
+```
+/home/lu18/.pal/tiago_dual_maps/configurations/2021-12-10_021714
+```
+
+#### Running a Demo of the Main Program
+
+Prerequisite: you have created a map as described in the previous section
+
+Launch the main program's configuration with the following command:
+```
+# Replace '/path/to/maps' with the path to the map data, the example in the
+# previous section was '/home/lu18/.pal/tiago_dual_maps/2021-12-10_021714'
+roslaunch enpm808x_final_inspection_robot main.launch map:="/path/to/maps"
+```
+
+This will start Gazebo with the specified map, RViz, multiple TIAGo
+nodes/utilities, and nodes created in this project. There are multiple optional
+arguments for this launch file:
+- view_image: '1' to also display the raw RGB image in a separate window, '0'
+  otherwise. Default value is '0'.
+- robot: The TIAGo robot model to use, either 'steel' or 'titanium'. Default
+  value is 'titanium'.
+- tiago_start_pose: The pose, relative to the world/map frame, to start the
+  TIAGo at. Default value is '-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0'.
+- extra_gazebo_args: Any additional arguments to also send to Gazebo. The
+  default value is none.
+
+Then, cans for inspection must be spawned. There is a demo launch file to spawn
+a fixed set of cans: 'demo.launch'. The launcher 'spawn_cans_from_list.launch'
+can be used to spawn a dynamically typed list. For example, this spawns three
+cans each with a couple of characteristics:
+```
+roslaunch enpm808x_final_inspection_robot spawn_cans_from_list.launch can_args_list:="1,1.0,1.0,0.0 : 0,2.0,1.0,0.0 : 1,-1.0,5.0,0.2"
+```
+
+The characteristics for each can are separated by a colon, and each individual
+characteristic is separated by a comma. These are as follows:
+- Whether the can is nominal (1) or defective (0).
+- The remaining three are the {x,y,z} coordinates of the initial spawn point,
+  in meters, relative to the map's coordinate system.
 
 ### Running the Tests
 
