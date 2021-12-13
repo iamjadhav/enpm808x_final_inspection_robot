@@ -214,4 +214,10 @@ cd /path/to/tiago_ws/
 
 ### Generating Doxygen Docs
 
-**TODO**
+There is a Doxygen configuration file in the project's root directory,
+_.doxyfile_. The output is generated in the _docs/doxygen/_ directory. There is
+already sample documentation there, but updated documentation can be generated
+with the following command:
+```
+doxygen .doxyfile
+```
