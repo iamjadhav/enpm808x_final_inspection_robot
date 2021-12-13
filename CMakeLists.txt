@@ -26,7 +26,7 @@ generate_messages(DEPENDENCIES geometry_msgs sensor_msgs)
 
 catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS roscpp geometry_msgs sensor_msgs actionlib control_msgs move_base_msgs tf std_msgs cv_bridge image_transport roslib
+    CATKIN_DEPENDS roscpp std_msgs geometry_msgs sensor_msgs actionlib control_msgs move_base_msgs tf cv_bridge image_transport roslib
 )
 
 include_directories(
