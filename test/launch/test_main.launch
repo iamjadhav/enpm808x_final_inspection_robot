@@ -12,9 +12,12 @@
         <arg name="map" value="$(find enpm808x_final_inspection_robot)/test/maps/test_main_maps" />
     </include>
     <include file="$(find enpm808x_final_inspection_robot)/test/launch/test_cans.launch" />
+    <!-- Give the test node a VERY long time before being considered a failure.
+         See test/TestMain.cpp -->
     <test test-name="my_test_main"
           pkg="enpm808x_final_inspection_robot"
           type="test_main"
+          time-limit="4000.0"
           launch-prefix="bash -c 'sleep $(arg test_sleep); $0 $@' "
     />
 </launch>

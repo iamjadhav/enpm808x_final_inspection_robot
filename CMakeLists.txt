@@ -70,11 +70,18 @@ if(CATKIN_ENABLE_TESTING)
         test_main
         ${catkin_LIBRARIES}
     )
-#    add_dependencies(
-#        test_main
-#        inspection_controller
-#        can_characterizer
-#    )
+
+    add_rostest_gtest(
+        test_inspection_controller
+        test/launch/test_inspection_controller.launch
+        test/TestInspectionController.cpp
+        src/InspectionController.cpp
+    )
+    target_link_libraries(
+        test_inspection_controller
+        ${catkin_LIBRARIES}
+    )
+
     install(
         DIRECTORY test
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
