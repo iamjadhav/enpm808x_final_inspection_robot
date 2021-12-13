@@ -38,6 +38,33 @@
                           << t.getRotation().getZ() << "," \
                           << t.getRotation().getW() << "]")
 
+#define TF_TO_POSE(tf, pose) \
+    pose.position.x = tf.getOrigin().getX(); \
+    pose.position.y = tf.getOrigin().getY(); \
+    pose.position.z = tf.getOrigin().getZ(); \
+    pose.orientation.x = tf.getRotation().getX(); \
+    pose.orientation.y = tf.getRotation().getY(); \
+    pose.orientation.z = tf.getRotation().getZ(); \
+    pose.orientation.w = tf.getRotation().getW()
+
+#define POSE_TO_TF(pose, tf) \
+    tf.getOrigin().setX(pose.position.x); \
+    tf.getOrigin().setY(pose.position.y); \
+    tf.getOrigin().setZ(pose.position.z); \
+    tf.getRotation().setX(pose.orientation.x); \
+    tf.getRotation().setY(pose.orientation.y); \
+    tf.getRotation().setZ(pose.orientation.z); \
+    tf.getRotation().setW(pose.orientation.w)
+
+#define GEOTF_TO_TF(geo_tf, tf) \
+    tf.getOrigin().setX(geo_tf.translation.x); \
+    tf.getOrigin().setY(geo_tf.translation.y); \
+    tf.getOrigin().setZ(geo_tf.translation.z); \
+    tf.getRotation().setX(geo_tf.rotation.x); \
+    tf.getRotation().setY(geo_tf.rotation.y); \
+    tf.getRotation().setZ(geo_tf.rotation.z); \
+    tf.getRotation().setW(geo_tf.rotation.w)
+
 // Help shorten typenames via namespace alias
 namespace enpm808x = enpm808x_final_inspection_robot;
 
@@ -89,16 +116,8 @@ void InspectionController::requestMoveBaseActionGoalFromCanPosition(
     STREAM_TF(" - tf_DiW", transform_WDi.inverse());
     STREAM_TF(" - tf_W0_desired_prime", transform_W0_desired_prime);
     STREAM_TF(" - tf_W0_desired", transform_W0_desired);
-    const tf::Vector3 t = transform_W0_desired.getOrigin();
-    const tf::Quaternion q = transform_W0_desired.getRotation();
     geometry_msgs::Pose pose;
-    pose.position.x = t.getX();
-    pose.position.y = t.getY();
-    pose.position.z = t.getZ();
-    pose.orientation.x = q.getX();
-    pose.orientation.y = q.getY();
-    pose.orientation.z = q.getZ();
-    pose.orientation.w = q.getW();
+    TF_TO_POSE(transform_W0_desired, pose);
     current_metrics.transform_WDi_expected = pose;
     requestMoveBaseActionGoal(pose);
 }
@@ -216,9 +235,59 @@ void InspectionController::handleMoveBaseResult(
         const move_base_msgs::MoveBaseResultConstPtr& msg) {
     // Handle any move result
     (void)msg;
-    bool continue_inspection =
+    bool move_successful = 
         state.state_ == actionlib::SimpleClientGoalState::StateEnum::SUCCEEDED;
-    current_metrics.move_sucessful = continue_inspection;
+    current_metrics.move_sucessful = move_successful;
+    if (is_going_home) {
+        // If we got home, there's not much we can do if there's an error
+        // Just log on error
+        if (!move_successful) {
+            ROS_ERROR_STREAM("Move to return to home pose was unsuccessful!");
+        }
+    } else {
+        // Is the result a success?
+        bool continue_inspection = move_successful;
+/*
+        int centroid_x = -1, centroid_y = -1;
+        if (continue_inspection) {
+            tf::StampedTransform transform_W0_measured;
+            tf_listener->lookupTransform("/map",
+                                         "/base_footprint",
+                                         ros::Time(0),
+                                         transform_W0_measured);
+            const tf::Transform transform_WC_measured = transform_W0_measured
+                                                        * transform_0C;
+            TF_TO_POSE(transform_WC_measured,
+                       current_metrics.transform_WC_measured);
+
+            enpm808x_final_inspection_robot::InspectCan inspect_srv;
+            inspect_srv.request.rgb_image = last_rgb_image;
+            current_metrics.can_detection_sucessful = 
+                inspect_can_cli->call(inspect_srv)
+                && inspect_srv.response.success;
+            current_metrics.can_nominal = inspect_srv.response.nominal;
+            centroid_x = inspect_srv.response.centroid_x;
+            centroid_y = inspect_srv.response.centroid_y;
+            continue_inspection = current_metrics.can_detection_sucessful
+                && !current_metrics.can_nominal;
+        }
+        if (continue_inspection) {
+            enpm808x_final_inspection_robot::LocalizeCan localize_srv;
+            localize_srv.request.point_cloud = last_point_cloud;
+            localize_srv.request.centroid_x = centroid_x;
+            localize_srv.request.centroid_y = centroid_y;
+            tf::Transform transform_CDi;
+            tf::Transform transform_WC_measured;
+            GEOTF_TO_TF(localize_srv.response.transform_CDi, transform_CDi);
+            POSE_TO_TF(current_metrics.transform_WC_measured,
+                       transform_WC_measured);
+            const tf::Transform transform_WDi =
+                transform_WC_measured * transform_CDi;
+            TF_TO_POSE(transform_WDi, current_metrics.transform_WDi_measured);
+        }
+*/
+    }
+
     finishPipelineIteration();
 }
 
