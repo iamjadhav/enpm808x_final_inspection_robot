@@ -78,11 +78,19 @@ if(CATKIN_ENABLE_TESTING)
         ${catkin_LIBRARIES}
 	${OpenCV_LIBS}
     )
-#    add_dependencies(
-#        test_main
-#        inspection_controller
-#        can_characterizer
-#    )
+
+    #add_rostest_gtest(
+    #    test_can_characterizer
+    #    test/launch/test_can_characterizer.launch
+    #    test/TestCanCharacterizer.cpp
+    #    src/CanCharacterizer.cpp
+    #)
+    #target_link_libraries(
+        #test_can_characterizer
+        #${catkin_LIBRARIES}
+	#${OpenCV_LIBS}
+    #)
+
     install(
         DIRECTORY test
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}

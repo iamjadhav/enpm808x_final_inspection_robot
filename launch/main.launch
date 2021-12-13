@@ -3,7 +3,7 @@
          project README for more information. -->
 
     <!-- argument required to be specified -->
-    <arg name="map" />
+    <!--arg name="map" /-->
 
     <!-- argument(s) which can be overridden -->
     <arg name="view_image" default="false" />
@@ -21,16 +21,16 @@
          - Tucks in the arm on start
          - Optionally opens RViz of the navigation's sensing
     -->
-    <include file="$(find tiago_2dnav_gazebo)/launch/tiago_navigation.launch">
+    <include file="$(find tiago_2dnav_gazebo)/launch/tiago_mapping.launch">
         <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)" />
         <arg name="gzpose" value="$(arg tiago_start_pose)" />
-        <arg name="lost" value="false" />
-        <arg name="map" value="$(arg map)" />
+        <!--arg name="lost" value="false" /-->
+        <!--arg name="map" value="$(arg map)" /-->
         <arg name="namespace" value="/" />
         <arg name="public_sim" value="true" />
         <arg name="recording" value="false" />
         <arg name="robot" value="$(arg robot)" />
-        <arg name="rviz" value="true" />
+        <arg name="rviz" value="false" />
         <arg name="tuck_arm" value="true" />
         <arg name="world" value="small_office" />
     </include>
