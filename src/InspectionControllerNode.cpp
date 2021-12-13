@@ -246,8 +246,10 @@ int main(int argc, char** argv) {
     // as future work in the interest of time. Furthermore, we also have to
     // wait for the robot's arm to be tucked in. For now, just sleep briefly
     // and spin once while waiting for these.
+    tf::TransformListener tf_listener;
     std::vector<tf::Vector3> expected_can_positions;
     bool has_expected_can_positions = false;
+    bool base_transform_is_ready = false;
     bool ready_to_start = false;
     ros::Rate sleep_rate(10);
     while (!ready_to_start) {
@@ -256,8 +258,24 @@ int main(int argc, char** argv) {
                 nh,
                 "can_args_list",
                 &expected_can_positions);
+            if (has_expected_can_positions) {
+                ROS_INFO_STREAM("Successfully parsed can positions.");
+            }
         }
-        ready_to_start = has_expected_can_positions && cont.isArmTucked();
+        if (!base_transform_is_ready) {
+            base_transform_is_ready = tf_listener.waitForTransform(
+                "/map",
+                "/base_footprint",
+                ros::Time(0),
+                ros::Duration(1));
+            if (base_transform_is_ready) {
+                ROS_INFO_STREAM("Confirmed existence of transform between /map"
+                                " and /base_footprint");
+            }
+        }
+        ready_to_start = has_expected_can_positions
+                         && base_transform_is_ready
+                         && cont.isArmTucked();
         if (!ready_to_start) {
             sleep_rate.sleep();
             ros::spinOnce();
