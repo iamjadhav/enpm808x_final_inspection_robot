@@ -12,12 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
     move_base_msgs
     tf
     std_msgs
-    cv_bridge
-    image_transport
-    roslib
 )
-
-find_package(OpenCV REQUIRED)
 
 add_service_files(
     DIRECTORY srv
@@ -31,7 +26,7 @@ generate_messages(DEPENDENCIES geometry_msgs sensor_msgs)
 
 catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS roscpp geometry_msgs sensor_msgs actionlib control_msgs move_base_msgs tf std_msgs cv_bridge image_transport roslib
+    CATKIN_DEPENDS roscpp geometry_msgs sensor_msgs actionlib control_msgs move_base_msgs tf std_msgs
 )
 
 include_directories(
@@ -46,7 +41,6 @@ add_dependencies(inspection_controller enpm808x_final_inspection_robot_generate_
 add_executable(can_characterizer src/CanCharacterizer.cpp src/CanCharacterizerNode.cpp)
 target_link_libraries(can_characterizer ${catkin_LIBRARIES})
 add_dependencies(can_characterizer enpm808x_final_inspection_robot_generate_messages_cpp)
-target_link_libraries(can_characterizer ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 install(
     DIRECTORY include
@@ -76,7 +70,6 @@ if(CATKIN_ENABLE_TESTING)
     target_link_libraries(
         test_main
         ${catkin_LIBRARIES}
-	${OpenCV_LIBS}
     )
 #    add_dependencies(
 #        test_main

@@ -21,13 +21,8 @@
  */
 
 #include <ros/ros.h>
-#include <ros/package.h>
 #include <gtest/gtest.h>
-#include <sensor_msgs/image_encodings.h>
 #include <memory>
-#include <string>
-#include <opencv2/opencv.hpp>
-#include "cv_bridge/cv_bridge.h"
 #include "enpm808x_final_inspection_robot/LocalizeCan.h"
 
 
@@ -35,52 +30,13 @@
 
 std::unique_ptr<ros::NodeHandle> nh;
 
-/**
-*  Simple Existence Test for the InspectCan Service.
-*/
-TEST(InspectCanTest, Test_Inspect_can) {
+TEST(ServiceTest, ServiceExistence) {
+  //ros::NodeHandle n;
   auto client = nh->serviceClient<enpm808x_final_inspection_robot::InspectCan>
-  ("inspect_can");
+  ("inspectcan");
   bool exists(client.waitForExistence(ros::Duration(5)));
-  EXPECT_TRUE(exists);
-}
-
-/**
-* Testing the inspect can service callback function handleInspectCanRequest
-*/
-TEST(Handle_InspectCan, Test_InspectionCan_callback) {
-  // declaring a client for InspectCan service
-  auto client = nh->serviceClient<enpm808x_final_inspection_robot::InspectCan>
-  ("inspect_can");
-  // inspect can service object
+  EXPECT_FALSE(exists);
   enpm808x_final_inspection_robot::InspectCan srv;
-  // loading an image from file
-  std::string image = ros::package::getPath(
-                    "enpm808x_final_inspection_robot") + "/test_data/test.jpeg";
-  cv::Mat testimg = cv::imread(image);
-  // warming up for service creation
-  ros::Duration(10).sleep();
-  int counter = 1;
-  cv_bridge::CvImage img_bridge;
-  sensor_msgs::Image img_msg;
-  std_msgs::Header header;
-  header.seq = counter;
-  header.stamp = ros::Time::now();
-  img_bridge = cv_bridge::CvImage(header, sensor_msgs::image_encodings::RGB8,
-                                                                      testimg);
-  // converted from opencv image to ros message
-  img_bridge.toImageMsg(img_msg);
-  // assigning service request parameter rgb_image
-  srv.request.rgb_image = img_msg;
-  // calling service
-  if (client.call(srv)) {
-    // validating service responses
-    ROS_WARN("Centroid_X %ld", srv.response.centroid_x);
-    ROS_WARN("Centroid_Y %ld", srv.response.centroid_y);
-    EXPECT_TRUE(srv.response.success);
-  } else {
-    ROS_ERROR("Failed to call service");
-  }
 }
 
 
