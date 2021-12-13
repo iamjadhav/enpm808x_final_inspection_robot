@@ -28,9 +28,14 @@ void InspectionController::requestMoveBaseActionGoal(
     (void)pose;
 }
 
+void InspectionController::finishPipelineIteration() {
+}
+
 InspectionController::InspectionController(
+        ros::NodeHandle& nh,
         const geometry_msgs::Pose& home_position,
         const tf::Transform& detection_pose_offset) {
+    (void)nh;
     (void)home_position;
     (void)detection_pose_offset;
 }
@@ -44,7 +49,9 @@ void InspectionController::handleArmTrajectoryResult(
 }
 
 void InspectionController::handleMoveBaseResult(
-        const move_base_msgs::MoveBaseActionResultConstPtr& msg) {
+        const actionlib::SimpleClientGoalState& state,
+        const move_base_msgs::MoveBaseResultConstPtr& msg) {
+    (void)state;
     (void)msg;
 }
 
@@ -56,6 +63,11 @@ void InspectionController::handleRgbImageUpdate(
 void InspectionController::handlePointCloudUpdate(
         const sensor_msgs::PointCloud2ConstPtr& msg) {
     (void)msg;
+}
+
+void InspectionController::inspect(
+        const std::vector<tf::Vector3>& new_expected_can_positions) {
+    (void)new_expected_can_positions;
 }
 
 bool InspectionController::isArmTucked() const {
