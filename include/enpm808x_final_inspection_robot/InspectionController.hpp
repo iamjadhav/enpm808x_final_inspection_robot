@@ -100,7 +100,7 @@ class InspectionController {
      * Publisher to inform others that inspection of all cans is finished.
      */
     uptr<ros::Publisher> inspection_finished_pub;
-    
+
     /**
      * The transform listener used to get tf data.
      */
@@ -172,7 +172,8 @@ class InspectionController {
      * @param position_WDi The expected position of the (possibly) defective
      * can resolved in the world frame.
      */
-    void requestMoveBaseActionGoalFromCanPosition(const tf::Vector3& position_WDi);
+    void requestMoveBaseActionGoalFromCanPosition(const tf::Vector3&
+                                                    position_WDi);
 
     /**
      * Perform any final tasks in an iteration of the inspection pipeline. This

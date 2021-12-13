@@ -19,12 +19,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+#include <ros/ros.h>
 #include <string>
 #include <regex>
 #include <stdexcept>
 
-#include <ros/ros.h>
+
 
 #include "enpm808x_final_inspection_robot/InspectionController.hpp"
 
@@ -209,7 +209,7 @@ namespace {
         }
         return rc;
     }
-}
+}  // namespace
 
 /**
  * The main entry point of our inspection controller node.
@@ -283,11 +283,13 @@ int main(int argc, char** argv) {
     }
 
     // Print the can attributes (expected/approximate x, y, and z coordinates)
-    ROS_INFO_STREAM("Expecting " << expected_can_positions.size() << " cans at:");
+    ROS_INFO_STREAM("Expecting " << expected_can_positions.size() <<
+                                                                " cans at:");
     for (auto iter = expected_can_positions.begin();
             iter != expected_can_positions.end();
             ++iter) {
-        ROS_INFO_STREAM("  x=" << iter->x() << ", y=" << iter->y() << ", z=" << iter->z());
+        ROS_INFO_STREAM("  x=" << iter->x() << ", y=" << iter->y() << ", z="
+                                                                << iter->z());
     }
 
     // Pass this onto the controller and let it drive the rest of the program

@@ -156,7 +156,7 @@ using Enpm808xIm = enpm808x_final_inspection_robot::InspectionMetrics;
 std::unique_ptr<ros::NodeHandle> nh;
 
 TEST(ServiceTest, ServiceExistence) {
-  //ros::NodeHandle n;
+  // ros::NodeHandle n;
   auto client = nh->serviceClient<enpm808x_final_inspection_robot::InspectCan>
   ("inspectcan");
   bool exists(client.waitForExistence(ros::Duration(5)));
@@ -217,8 +217,8 @@ TEST(TESTSuite, testFullPipeline1) {
         EXPECT_TRUE(iter->move_sucessful);
     }
 
-    // TODO: compare more results to the captured metrics once CanCharacterizer
-    // and the rest of the pipeline is implemented
+    // TODO(@rnvandemark): compare more results to the captured metrics once
+    // CanCharacterizer and the rest of the pipeline is implemented
 }
 
 int main(int argc, char** argv) {

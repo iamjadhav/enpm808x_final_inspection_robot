@@ -78,7 +78,7 @@ namespace {
         im->transform_WDi_expected = identity;
         im->transform_WDi_measured = identity;
     }
-}
+}  // namespace
 
 void InspectionController::requestMoveBaseActionGoal(
         const geometry_msgs::Pose& pose) {
@@ -101,8 +101,7 @@ void InspectionController::requestMoveBaseActionGoalFromCanPosition(
     const tf::Transform transform_WDi(tf::Quaternion::getIdentity(),
                                       position_WDi);
     const tf::Transform transform_W0_desired_prime = (
-        transform_0primeC * transform_CDi * transform_WDi.inverse()
-    ).inverse();
+        transform_0primeC * transform_CDi * transform_WDi.inverse()).inverse();
     const tf::Transform transform_W0_desired(
         detection_pose_offset.getRotation(),
         tf::Vector3(
@@ -235,7 +234,7 @@ void InspectionController::handleMoveBaseResult(
         const move_base_msgs::MoveBaseResultConstPtr& msg) {
     // Handle any move result
     (void)msg;
-    bool move_successful = 
+    bool move_successful =
         state.state_ == actionlib::SimpleClientGoalState::StateEnum::SUCCEEDED;
     current_metrics.move_sucessful = move_successful;
     if (is_going_home) {
@@ -262,7 +261,7 @@ void InspectionController::handleMoveBaseResult(
 
             enpm808x_final_inspection_robot::InspectCan inspect_srv;
             inspect_srv.request.rgb_image = last_rgb_image;
-            current_metrics.can_detection_sucessful = 
+            current_metrics.can_detection_sucessful =
                 inspect_can_cli->call(inspect_srv)
                 && inspect_srv.response.success;
             current_metrics.can_nominal = inspect_srv.response.nominal;

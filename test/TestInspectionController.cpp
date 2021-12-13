@@ -86,10 +86,9 @@ TEST(TESTSuite, testArmTrajectoryResult) {
     } \
     EXPECT_TRUE(cont.isArmTucked()); \
     arm_traj_action_cli.stopTrackingGoal(); \
-    arm_traj_action_srv.shutdown() \
-
+    arm_traj_action_srv.shutdown(){ \
     // Create scoped tests to help destroy the objects
-    {
+
         // The arm should NOT be marked as 'tucked' after this tests' callback
         DO_ARM_TEST(armCallbackBad);
     }
@@ -154,12 +153,11 @@ TEST(TESTSuite, testInspect) {
         EXPECT_NEAR(result.position.z, 0.0, 0.000001); \
     } \
     inspection_metrics_sub.shutdown(); \
-    finished_sub.shutdown()
-
+    finished_sub.shutdown(){
     // Create scoped tests to help destroy the objects with these random values
     // (the exact values shouldn't matter, just that the inputs and outputs
     // agree)
-    {
+
         DO_INSPECT_TEST(std::vector<tf::Vector3>({
             tf::Vector3(1.0, 2.0, 3.0)
         }));
