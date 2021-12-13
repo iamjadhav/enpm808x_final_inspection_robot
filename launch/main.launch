@@ -42,8 +42,4 @@
           args="image:=/xtion/rgb/image_raw"
           if="$(arg view_image)"
     />
-    <node pkg = "enpm808x_final_inspection_robot"
-		type = "can_characterizer"
-		name = "can_characterizer"
-		output = "screen"/>
 </launch>

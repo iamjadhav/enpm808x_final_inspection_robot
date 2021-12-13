@@ -26,8 +26,6 @@
 #include <sensor_msgs/Image.h>
 #include <vector>
 #include "ros/ros.h"
-#include <opencv2/opencv.hpp>
-#include "cv_bridge/cv_bridge.h"
 #include "enpm808x_final_inspection_robot/InspectCan.h"
 #include "enpm808x_final_inspection_robot/LocalizeCan.h"
 
@@ -39,7 +37,7 @@
 class CanCharacterizer {
  private:
   // The Server for the InspectCan Service
-  // ros::ServiceServer inspect_can_srv;
+  ros::ServiceServer inspect_can_srv;
   // The Server for the LocalizeCan Service
   ros::ServiceServer localize_can_srv;
 

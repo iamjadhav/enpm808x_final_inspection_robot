@@ -18,10 +18,6 @@
     <depend>control_msgs</depend>
     <depend>move_base_msgs</depend>
     <depend>tf</depend>
-    <depend>std_msgs</depend>
-    <depend>cv_bridge</depend>
-    <depend>image_transport</depend>
-    <depend>roslib</depend>
 
     <doc_depend>doxygen</doc_depend>
 </package>
