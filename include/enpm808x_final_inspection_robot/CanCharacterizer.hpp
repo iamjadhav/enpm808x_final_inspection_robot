@@ -26,6 +26,8 @@
 #include <sensor_msgs/Image.h>
 #include <vector>
 #include "ros/ros.h"
+#include <opencv2/opencv.hpp>
+#include "cv_bridge/cv_bridge.h"
 #include "enpm808x_final_inspection_robot/InspectCan.h"
 #include "enpm808x_final_inspection_robot/LocalizeCan.h"
 

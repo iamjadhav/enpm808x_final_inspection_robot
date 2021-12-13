@@ -36,9 +36,48 @@ CanCharacterizer::~CanCharacterizer() {
 bool CanCharacterizer::handleInspectCanRequest(
     enpm808x_final_inspection_robot::InspectCan::InspectCan::Request &req,
     enpm808x_final_inspection_robot::InspectCan::InspectCan::Response &res) {
-      
-return true;
+  cv_bridge::CvImagePtr convert_cv;
+  // source image, hsv image and masked image
+  cv::Mat cvImage, hsvFrame, maskedFrame;
+  // HSV Lower Limit blue
+  const cv::Scalar hsvLower = {115, 36, 0};
+  // HSV Higher Limit blue
+  const cv::Scalar hsvHigher = {165, 255, 255};
+
+  // // HSV Lower Limit red
+  // const cv::Scalar hsvLower = {0, 230, 0};
+  // // HSV Higher Limit red
+  // const cv::Scalar hsvHigher = {37, 255, 255};
+
+  // converting ros image to an opencv image with cv bridge
+  try {
+  convert_cv = cv_bridge::toCvCopy(req.rgb_image,
+                                          sensor_msgs::image_encodings::BGR8);
+  cvImage = convert_cv->image;
+  cv::waitKey(30);
+  }
+  catch (cv_bridge::Exception& e) {
+  ROS_ERROR_STREAM("cv_bridge exception: " << e.what());
+  }
+  // converting to HSV image and thresholding to get masked image
+  cv::cvtColor(cvImage, hsvFrame, CV_BGR2HSV);
+  cv::inRange(hsvFrame, hsvLower, hsvHigher, maskedFrame);
+  // calculating the centroid
+  cv::Moments m = cv::moments(maskedFrame, true);
+  cv::Point p(m.m10/m.m00, m.m01/m.m00);
+  // assigning and converting centroid coordinates
+  res.centroid_x = static_cast<std::int64_t>(p.x);
+  res.centroid_y = static_cast<std::int64_t>(p.y);
+  if (res.centroid_x && res.centroid_y) {
+  res.success = true;
+  res.nominal = false;
+  } else {
+  res.success = false;
+  res.nominal = true;
+  }
+  return true;
 }
+
 
 bool CanCharacterizer::handleLocalizeCanRequest(
     enpm808x_final_inspection_robot::LocalizeCan::LocalizeCan::Request &req,
