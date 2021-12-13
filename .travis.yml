@@ -94,6 +94,10 @@ install:
   - cd ~/catkin_ws/src
   - ln -s $CI_SOURCE_PATH .
   - sudo apt-get install -y -qq lcov
+  # Copy a file as expected by the tests
+  - mkdir -p ~/.pal
+  - cp ./enpm808x_final_inspection_robot/test/pose.yaml ~/.pal
+  - cat ~/.pal/pose.yaml
 
 # Install all dependencies, using wstool first and rosdep second.
 # wstool looks for a ROSINSTALL_FILE defined in the environment variables.
