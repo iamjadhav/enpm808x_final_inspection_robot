@@ -5,7 +5,22 @@
 
 ## Project Overview/Description
 
-**TODO**
+This package intends to provide an implementation of an automated inspection
+robot, which can map its environment, plan paths, and dynamically update for
+obstacle avoidance. The inspection routine is a simple 'defective' check for
+color on 'cans' spawned at dynamically specified locations. Once specified,
+the robot will move to a pose slightly offset from the position to inspect the
+can using its built in sensors and cameras, repeat for each can, them go back
+to its home position.
+
+The robot used is the [TIAGo robot](https://pal-robotics.com/robots/tiago/),
+chosen because of its all-in-one solution for motion and sensing, as well as
+its massive support for open-sourced ROS/Gazebo/RViz solutions.
+
+This package builds on top of those utilities with its own custom controller to
+interface with the robot. Below describes the procedure to prepare the
+environment, run the main controller, and spawn a list of 'cans' for
+inspection.
 
 ## Personnel
 
