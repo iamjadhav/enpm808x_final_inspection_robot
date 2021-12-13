@@ -1,0 +1,72 @@
+\hypertarget{InspectionController_8hpp}{}\section{include/enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\+Inspection\+Controller.hpp File Reference}
+\label{InspectionController_8hpp}\index{include/enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\+Inspection\+Controller.\+hpp@{include/enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\+Inspection\+Controller.\+hpp}}
+
+
+The main controller for the inspection process pipeline, which helps to communicate objectives and status on the R\+OS network.  
+
+
+{\ttfamily \#include $<$ros/service\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$ros/subscriber.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+client\+\_\+goal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$move\+\_\+base\+\_\+msgs/\+Move\+Base\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/\+Image.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/\+Point\+Cloud2.\+h$>$}\newline
+{\ttfamily \#include $<$control\+\_\+msgs/\+Follow\+Joint\+Trajectory\+Action\+Result.\+h$>$}\newline
+{\ttfamily \#include $<$tf/transform\+\_\+listener.\+h$>$}\newline
+{\ttfamily \#include $<$tf/\+Linear\+Math/\+Transform.\+h$>$}\newline
+{\ttfamily \#include $<$tf/\+Linear\+Math/\+Vector3.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}enpm808x\+\_\+final\+\_\+inspection\+\_\+robot/\+Inspection\+Metrics.\+h\char`\"{}}\newline
+Include dependency graph for Inspection\+Controller.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{InspectionController_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{InspectionController_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classInspectionController}{Inspection\+Controller}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{InspectionController_8hpp_ad9d82b56812eee6c9be862194f37f663}\label{InspectionController_8hpp_ad9d82b56812eee6c9be862194f37f663}} 
+{\footnotesize template$<$typename T $>$ }\\using {\bfseries uptr} = std\+::unique\+\_\+ptr$<$ T $>$
+\item 
+\mbox{\Hypertarget{InspectionController_8hpp_adc49b550c7d757bf32374d4b89eaa000}\label{InspectionController_8hpp_adc49b550c7d757bf32374d4b89eaa000}} 
+using {\bfseries Move\+Base\+Action\+Cli} = actionlib\+::\+Simple\+Action\+Client$<$ move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Action $>$
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The main controller for the inspection process pipeline, which helps to communicate objectives and status on the R\+OS network. 
+
+\begin{DoxyAuthor}{Author}
+Robert Vandemark 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2021-\/12-\/05
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright 2021 Robert Vandemark, Aditya Jadhav, Abhishek Nalawade
+\end{DoxyCopyright}
+Licensed under the Apache License, Version 2.\+0 (the \char`\"{}\+License\char`\"{}); you may not use this file except in compliance with the License. You may obtain a copy of the License at \begin{DoxyVerb}  http://www.apache.org/licenses/LICENSE-2.0
+\end{DoxyVerb}
+
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \char`\"{}\+A\+S I\+S\char`\"{} B\+A\+S\+IS, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+T\+I\+ES OR C\+O\+N\+D\+I\+T\+I\+O\+NS OF A\+NY K\+I\+ND, either express or implied. See the License for the specific language governing permissions and limitations under the License. 

@@ -5,9 +5,22 @@
 
 ## Project Overview/Description
 
-**TODO**
+This package intends to provide an implementation of an automated inspection
+robot, which can map its environment, plan paths, and dynamically update for
+obstacle avoidance. The inspection routine is a simple 'defective' check for
+color on 'cans' spawned at dynamically specified locations. Once specified,
+the robot will move to a pose slightly offset from the position to inspect the
+can using its built in sensors and cameras, repeat for each can, them go back
+to its home position.
 
-See the license for this project [here](LICENSE.txt).
+The robot used is the [TIAGo robot](https://pal-robotics.com/robots/tiago/),
+chosen because of its all-in-one solution for motion and sensing, as well as
+its massive support for open-sourced ROS/Gazebo/RViz solutions.
+
+This package builds on top of those utilities with its own custom controller to
+interface with the robot. Below describes the procedure to prepare the
+environment, run the main controller, and spawn a list of 'cans' for
+inspection.
 
 ## Personnel
 
@@ -21,11 +34,18 @@ See the license for this project [here](LICENSE.txt).
 
 #### R. Nick Vandemark
 
-**TODO**
+Nick graduated from his undergraduate program in the summer of 2019 with a
+skillset in computer engineering, software engineering, mathematics, and
+physics. He was a robotics engineer at a collaborative robotics startup for two
+years, and has been a contractor for NASA as a robotics software engineer for
+the last 1.5 years. Seeking a formal education in it, he is also about halfway
+through the robotics engineering program at UMD, in order to strengthen his
+otherwise self-taught background. His hobbies include creating software, rock
+climbing, snowboarding, bonfires, and, more recently, 3D modeling.
 
 ## License
 
-**TODO**
+See the license for this project [here](LICENSE.txt).
 
 ## Links to Agile Iterative Process (AIP) Products
 
@@ -42,7 +62,28 @@ deliverables of the initial proposal in the "Proposal" directory.
 
 ## Known Issues/Bugs
 
-**TODO**
+### System-Level Issues
+
+- [ ] The controller API provided here is tightly bound to ROS and Gazebo. This
+  may be acceptable considering the TIAGo utilities are as well, but there it'd
+  be beneficial to explore decoupling this controller from ROS utilities.
+- [ ] The CanCharacterizer class unfortunately remains unimplemented. The main
+      controller has stubbed out its interaction with this node for now and can
+      move as would be expected during the actual inspection routine, but no
+      inspection is performed at the moment.
+- [ ] The automated build jobs, including the tests, take a while to finish
+      because a lot of packages are built from source. Many of these are
+      possibly unnecessary for this package's intentions and could be removed
+      as dependencies. This was put off for the future in the interest of time.
+
+### Small Bugs / Issues to Note
+
+- [ ] The frames for the RGB camera and depth sensor are assumed to be the
+  same, but this is not true in reality. There is a very slight,
+  one-dimensional, translational offset that should really be accounted for.
+- [ ] There could be more intensive integration tests put in place, but were
+  put off as future work in the interest of time. Especially considering the
+  automated builds and tests already take a while.
 
 ## Dependencies
 
@@ -214,4 +255,10 @@ cd /path/to/tiago_ws/
 
 ### Generating Doxygen Docs
 
-**TODO**
+There is a Doxygen configuration file in the project's root directory,
+_.doxyfile_. The output is generated in the _docs/doxygen/_ directory. There is
+already sample documentation there, but updated documentation can be generated
+with the following command:
+```
+doxygen .doxyfile
+```
