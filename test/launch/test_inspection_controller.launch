@@ -1,0 +1,11 @@
+<launch>
+    <node pkg="tf"
+          type="static_transform_publisher"
+          name="transform_0C_broadcaster" args="0 0 0 0 0 0 1 /base_footprint /xtion_rgb_optical_frame 500"
+          required="true"
+    />
+    <test test-name="my_test_inspection_controller"
+          pkg="enpm808x_final_inspection_robot"
+          type="test_inspection_controller"
+    />
+</launch>
