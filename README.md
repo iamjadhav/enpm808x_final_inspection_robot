@@ -266,3 +266,9 @@ doxygen .doxyfile
 ## Presentation Video URL
 
 https://drive.google.com/file/d/1cki9b_330VcfZ-kmi1wQiNwIZLHwVnTX/view?usp=sharing
+
+### Supplementary videos of (slow) simulation
+
+https://youtu.be/jFXDO_vfOYQ
+
+https://youtu.be/wUX7CHhKpzY
